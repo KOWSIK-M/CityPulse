@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/Citizo/static/css/main.97c96c88.css",
-    "main.js": "/Citizo/static/js/main.a1aa7f50.js",
+    "main.js": "/Citizo/static/js/main.41d51664.js",
     "static/media/main.jpg": "/Citizo/static/media/main.f2ba9198643f122608b2.jpg",
     "static/media/image.png": "/Citizo/static/media/image.7f91aab294d95fa4d2e1.png",
     "static/media/whatsapp.png": "/Citizo/static/media/whatsapp.97b90b6e3f8c70254204.png",
     "index.html": "/Citizo/index.html",
     "main.97c96c88.css.map": "/Citizo/static/css/main.97c96c88.css.map",
-    "main.a1aa7f50.js.map": "/Citizo/static/js/main.a1aa7f50.js.map"
+    "main.41d51664.js.map": "/Citizo/static/js/main.41d51664.js.map"
   },
   "entrypoints": [
     "static/css/main.97c96c88.css",
-    "static/js/main.a1aa7f50.js"
+    "static/js/main.41d51664.js"
   ]
 }
