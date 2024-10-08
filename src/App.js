@@ -38,8 +38,8 @@ function App() {
               </h1>
               <ul className="nav-items" style={{ marginLeft: "60vw" }}>
                 <li className="nav-item"><a href="/Citizo">Home</a></li>
-                <li className="nav-item"><a href="/about">About</a></li>
-                <li className="nav-item"><a href="/contact">Contact us</a></li>
+                <li className="nav-item"><a href="/Citizo/about">About</a></li>
+                <li className="nav-item"><a href="Citizo/contact">Contact us</a></li>
                 <li className="nav-item" style={{ marginLeft: "5vw" }}>
                 <label class="popup">
                         <input type="checkbox" />
