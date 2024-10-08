@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React from "react";
 import './contact.css';
 import wa from './images/whatsapp.png';
 

@@ -13,7 +13,7 @@ function Website() {
   return (
     <BrowserRouter>
     <div>
-        <Routes>
+        <Routes basename="/">
         <Route path="/" element={<App/>} />
         <Route path="/userlogin" element={<Userlogin/>} />
         <Route path="/adminlogin" element={<Adminlogin/>} />
