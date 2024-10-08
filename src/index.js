@@ -13,8 +13,8 @@ function Website() {
   return (
     <BrowserRouter>
     <div>
-        <Routes basename="/">
-        <Route path="/" element={<App/>} />
+        <Routes basename="/Citizo">
+        <Route path="/Citizo" element={<App/>} />
         <Route path="/userlogin" element={<Userlogin/>} />
         <Route path="/adminlogin" element={<Adminlogin/>} />
         <Route path="/contact" element={<Contact/>}/>
