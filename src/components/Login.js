@@ -1,17 +1,19 @@
 import React from 'react'
 import './Login.css'
 import GoogleSignIn from './GoogleSignIn'
+import logo from '../images/logo.png'
 export default function Login(props) {
   return (
     <div style={{height:"100vh"}}>
 <form class="form_container">
-  <div class="logo_container"></div>
+  <div class="logo_container">
+    
+  <img src={logo} alt="logo" height={80} width={80} style={{borderRadius:"25%"}}/>
+  </div>
   <div class="title_container">
   <p class="title">{props.typeofUser} Login</p>
-    <p class="title">Login to your Account</p>
     <span class="subtitle">Get started with our app, just create an account and enjoy the experience.</span>
   </div>
-  <br/>
   <div class="input_container">
     <label class="input_label" for="email_field">Email</label>
     <svg fill="none" viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg" class="icon">
@@ -34,12 +36,12 @@ export default function Login(props) {
   </button>
 
         <div class="separator">
-            <hr class="line"/>
-            <span>Or</span>
+            <hr class="line"/><p>Or</p>
             <hr class="line"/>
         </div>
+        <p>New User? <a href='/CityPulse/signup'>SignUp</a></p>Or
             <GoogleSignIn/>
-  <p class="note">Terms of use &amp; Conditions</p>
+  <a class="note" href='/CityPulse/terms&conditions'>Terms of use &amp; Conditions</a>
 </form>
     </div>
   )
