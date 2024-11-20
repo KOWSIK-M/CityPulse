@@ -4,6 +4,7 @@ import GoogleSignIn from './GoogleSignIn';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faEnvelope, faLock, faCity, faCalendar } from '@fortawesome/free-solid-svg-icons';
 import signupImg from '../images/signup-image.jpg';
+import { Link } from 'react-router-dom';
 
 export default function SignUp(props) {
   return (
@@ -74,7 +75,7 @@ export default function SignUp(props) {
               <div className="signup-image">
                 <figure><img src={signupImg} alt="sign up" /></figure>
                 <GoogleSignIn/>
-                <a href="/CityPulse/userlogin" className="signup-image-link">I am already a member</a>
+                <Link to="/CityPulse/userlogin" className="signup-image-link">I am already a member</Link>
               </div>
             </div>
           </div>

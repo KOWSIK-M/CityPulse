@@ -1,4 +1,6 @@
 import {React,useEffect} from 'react'
+import { Link } from 'react-router-dom';
+
 
 export default function Cookie() {
     useEffect(() => {
@@ -33,7 +35,7 @@ export default function Cookie() {
           </header>
           <div className="cookie-data">
             <p>
-              This website uses cookies to ensure you get the best experience. <a href="/CityPulse/terms&conditions">Read more...</a>
+              This website uses cookies to ensure you get the best experience. <Link to="/CityPulse/terms&conditions" >Read more...</Link>
             </p>
           </div>
           <div className="cookie-buttons">

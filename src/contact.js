@@ -2,6 +2,7 @@ import React from "react";
 import './contact.css';
 import wa from './images/whatsapp.png';
 import logo from '../src/images/logo.png'
+import { Link } from "react-router-dom";
 
 const AnchorStyle={textDecoration:'none'}
 function Contact(){
@@ -16,13 +17,13 @@ function Contact(){
                 <i className="fas fa-vihara"> CityPulse </i>
               </h1>
               <ul className="nav-items" style={{ marginLeft: "60vw" }}>
-                <li className="nav-item"><a href="/CityPulse">Home</a></li>
-                <li className="nav-item"><a href="/CityPulse/about">About</a></li>
-                <li className="nav-item"><a href="/CityPulse/contact">Contact us</a></li>
+                <li className="nav-item"><Link to="/CityPulse">Home</Link></li>
+                <li className="nav-item"><Link to="/CityPulse/about">About</Link></li>
+                <li className="nav-item"><Link to="/CityPulse/contact">Contact us</Link></li>
                 <li className="nav-item" style={{ marginLeft: "5vw" }}>
                 <div class="menu">
                   <div class="item">
-                    <a href="#" class="link" style={AnchorStyle}>
+                    <Link to="#" class="link" style={AnchorStyle}>
                       <span> Login </span>
                       <svg viewBox="0 0 360 360">
                         <g id="SVGRepo_iconCarrier">
@@ -32,13 +33,13 @@ function Contact(){
                           ></path>
                         </g>
                       </svg>
-                    </a>
+                    </Link>
                     <div class="submenu">
                       <div class="submenu-item">
-                        <a href="/CityPulse/userlogin" class="submenu-link" style={AnchorStyle}> User </a>
+                        <Link to="/CityPulse/userlogin" class="submenu-link" style={AnchorStyle}> User </Link>
                       </div>
                       <div class="submenu-item">
-                        <a href="/CityPulse/adminlogin" class="submenu-link" style={AnchorStyle}> Admin </a>
+                        <Link to="/CityPulse/adminlogin" class="submenu-link" style={AnchorStyle}> Admin </Link>
                       </div>
                     </div>
                   </div>
@@ -54,11 +55,11 @@ function Contact(){
 
 <div class="contact-link1">
 
-        <a class="me" href="whatsapp://send?phone=9346339305" style={AnchorStyle}>Contact Us via WhatsApp </a>&nbsp;<img src={wa} alt="" style={{height:"35px",width:"35px"}}></img>
+        <Link class="me" to="whatsapp://send?phone=9346339305" style={AnchorStyle}>Contact Us via WhatsApp </Link>&nbsp;<img src={wa} alt="" style={{height:"35px",width:"35px"}}></img>
     </div>
     <div class="contact-link2">
         <i class="fa2" ></i>
-        <a class="m" href="mailto:2200030358@kluniversity.in?subject=Your%20Subject&body=Your%20Message%20Here" style={AnchorStyle}>Contact us via Email✉️</a>
+        <Link class="m" to="mailto:2200030358@kluniversity.in?subject=Your%20Subject&body=Your%20Message%20Here" style={AnchorStyle}>Contact us via Email✉️</Link>
     </div>
     </div>
     </div>

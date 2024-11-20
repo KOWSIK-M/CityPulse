@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 const AnchorStyle={textDecoration:'none'}
 
 export default function Navbar() {
@@ -8,13 +9,13 @@ export default function Navbar() {
 
         <ul className="nav justify-content-center">
   <li className="nav-item" >
-    <a className="nav-link active" aria-current="page" href="/CityPulse" style={AnchorStyle}>©CityPulse</a>
+    <Link className="nav-link active" aria-current="page" to="/CityPulse" style={AnchorStyle}>©CityPulse</Link>
   </li>
   <li className="nav-item">
-    <a className="nav-link" href="CityPulse/about" style={AnchorStyle}>About</a>
+    <Link className="nav-link" to="/CityPulse/about" style={AnchorStyle}>About</Link>
   </li>
   <li className="nav-item">
-    <a className="nav-link" href="/CityPulse/terms&conditions" style={AnchorStyle}>T&C apply</a>
+    <Link className="nav-link" to="/CityPulse/terms&conditions" style={AnchorStyle}>T&C apply</Link>
   </li>
 
 </ul>

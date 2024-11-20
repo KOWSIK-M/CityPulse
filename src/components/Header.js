@@ -1,5 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import logo from '../images/logo.png';
+import {Link} from 'react-router-dom';
+import heroVideo from '../videos/bg.mp4';
 
 const AnchorStyle={textDecoration:'none'}
 
@@ -33,6 +35,8 @@ export default function Header() {
   return (
     <div>
       <header className="header">
+      <video className="hero-video" src={heroVideo} autoPlay loop muted />
+        <div className="hero-overlay"></div>
         <nav className="navbar1">
           <div className="container">
             <h1 className="logo lg-heading text-light">
@@ -40,9 +44,9 @@ export default function Header() {
               <i className="fas fa-vihara"> CityPulse </i>
             </h1>
             <ul className="nav-items" style={{ marginLeft: "56vw" }}>
-              <li className="nav-item"><a href="/CityPulse" style={AnchorStyle}>Home</a></li>
-              <li className="nav-item"><a href="/CityPulse/about" style={AnchorStyle}>About</a></li>
-              <li className="nav-item"><a href="/CityPulse/contact"style={AnchorStyle}>Contact us</a></li>
+              <li className="nav-item"><Link to="/CityPulse" style={AnchorStyle}>Home</Link></li>
+              <li className="nav-item"><Link to="/CityPulse/about" style={AnchorStyle}>About</Link></li>
+              <li className="nav-item"><Link to="/CityPulse/contact" style={AnchorStyle}>ContactUs</Link></li>
               <li className="nav-item">
                 <div class="menu">
                   <div class="item">
@@ -59,10 +63,10 @@ export default function Header() {
                     </a>
                     <div class="submenu">
                       <div class="submenu-item">
-                        <a href="/CityPulse/userlogin" class="submenu-link" style={AnchorStyle}> User </a>
+                        <Link to="/CityPulse/userlogin" className="submenu-link" style={AnchorStyle}>User</Link>
                       </div>
                       <div class="submenu-item">
-                        <a href="/CityPulse/adminlogin" class="submenu-link" style={AnchorStyle}> Admin </a>
+                        <Link to="/CityPulse/adminlogin"  className="submenu-link" style={AnchorStyle}>Admin</Link>
                       </div>
                     </div>
                   </div>

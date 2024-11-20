@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Payment from './components/Payment';
 import './PricingPayment.css'
 
@@ -9,10 +10,10 @@ export default function PricingPayment() {
 
   return (
     <div>
-      <a href="#" class="back" onClick={goBack} >
+      <Link to="#" class="back" onClick={goBack} >
   <div></div>
   <span className='back-span'>Back to home</span>
-</a>
+</Link>
       <Payment />
     </div>
   );

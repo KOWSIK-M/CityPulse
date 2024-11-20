@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function HomeCards() {
   return (
@@ -10,7 +11,7 @@ export default function HomeCards() {
               <img src="https://loremflickr.com/1600/900/road,bridge" className="card-img-top" alt="city" style={{ height: "36vh", width: "24vw" }}></img>
               <h5 className="card-title fs-1">Special title treatment</h5>
               <p className="card-text fst-italic">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="/" className="btn btn-primary">Go somewhere</a>
+              <Link to="/" className="btn btn-primary">Go somewhere</Link>
             </div>
           </div>
         </div>
@@ -20,7 +21,7 @@ export default function HomeCards() {
               <img src="https://loremflickr.com/900/1600/forest,river" className="card-img-top" alt="city" style={{ height: "36vh", width: "24vw" }}></img>
               <h5 className="card-title fs-1">Special title treatment</h5>
               <p className="card-text fst-italic">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="/" className="btn btn-primary">Go somewhere</a>
+              <Link to="/" className="btn btn-primary">Go somewhere</Link>
             </div>
           </div>
         </div>
@@ -31,7 +32,7 @@ export default function HomeCards() {
               <img src="https://loremflickr.com/1600/900/hotel,building,lodge" className="card-img-top" alt="city" style={{ height: "36vh", width: "24vw" }}></img>
               <h5 className="card-title fs-1">Special title treatment</h5>
               <p className="card-text fst-italic">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="/" className="btn btn-primary">Go somewhere</a>
+              <Link to="/" className="btn btn-primary">Go somewhere</Link>
             </div>
           </div>
         </div>
@@ -42,7 +43,7 @@ export default function HomeCards() {
               <img src="https://loremflickr.com/900/1600/park,trees,place" className="card-img-top" alt="city" style={{ height: "36vh", width: "24vw" }}></img>
               <h5 className="card-title fs-1">Special title treatment</h5>
               <p className="card-text fst-italic">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="/" className="btn btn-primary">Go somewhere</a>
+              <Link to="/" className="btn btn-primary">Go somewhere</Link>
             </div>
           </div>
         </div>

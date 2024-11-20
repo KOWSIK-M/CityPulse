@@ -13,6 +13,12 @@ import SignUp from './components/SignUp';
 import TermsAndConditions from './TermsAndConditions';
 import PricingPayment from './PricingPayment';
 import Payment from './components/Payment';
+import UserDashboard from './UserDashboard';
+import CityMap1 from './example';
+import NavigationMap from './Navigate';
+import Dashboard from './components/Dashboard';
+import WeatherDetails from './components/WeatherDetails';
+import CityNews from './components/CityNews';
 function Website() {
   return (
     <BrowserRouter>
@@ -30,6 +36,14 @@ function Website() {
         <Route path="CityPulse/terms&conditions" element={<TermsAndConditions/>}/>
         <Route path="CityPulse/PricingPayment" element={<PricingPayment/>}/>
         <Route path="CityPulse/Payment" element={<Payment/>}/>
+        <Route path="CityPulse/UserDashboard" element={<UserDashboard/>}/>
+        
+        <Route path="CityPulse/example" element={<CityMap1/>}/>
+        <Route path="CityPulse/navigate" element={<NavigationMap/>}/>
+
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="/weather" element={<WeatherDetails />} />
+        <Route path="/CityPulse/News" element={<CityNews/>} />
         </Routes>
     </div>
     </BrowserRouter>

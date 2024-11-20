@@ -32,7 +32,6 @@ function App() {
       <ChatBot/>
       </div>
       <Footer />
-
     </>
   );
 }

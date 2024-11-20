@@ -1,6 +1,7 @@
 import React from "react";
 import './contact.css';
 import logo from '../src/images/logo.png'
+import { Link } from "react-router-dom";
 
 function About(){
 
@@ -13,9 +14,9 @@ function About(){
                 <i className="fas fa-vihara"> CityPulse </i>
               </h1>
               <ul className="nav-items" style={{ marginLeft: "40vw" }}>
-                <li className="nav-item"><a href="/CityPulse">Home</a></li>
-                <li className="nav-item"><a href="/CityPulse/about">About</a></li>
-                <li className="nav-item"><a href="/CityPulse/contact">Contact us</a></li>
+                <li className="nav-item"><Link to="/CityPulse">Home</Link></li>
+                <li className="nav-item"><Link to="/CityPulse/about">About</Link></li>
+                <li className="nav-item"><Link to="/CityPulse/contact">Contact us</Link></li>
                 <li className="nav-item" style={{ marginLeft: "0vw" }}>
                   <label class="popup">
                     <input type="checkbox" />
@@ -36,7 +37,7 @@ function About(){
                       <legend>Quick Start</legend>
                       <ul>
                         <li>
-                          <a href='/CityPulse/adminlogin' style={{ color: 'black' }}>
+                          <Link to='/CityPulse/adminlogin' style={{ color: 'black' }}>
                             <svg
                               width="14"
                               height="14"
@@ -52,10 +53,10 @@ function About(){
                               ></path>
                             </svg>
                             <span>Admin</span>
-                          </a>
+                          </Link>
                         </li>
                         <li>
-                          <a href='/CityPulse/userlogin' style={{ color: 'black' }}>
+                          <Link to='/CityPulse/userlogin' style={{ color: 'black' }}>
                             <svg
                               width="14"
                               height="14"
@@ -71,7 +72,7 @@ function About(){
                               ></path>
                             </svg>
                             <span>User</span>
-                          </a>
+                          </Link>
                         </li>
                       </ul>
                     </nav>

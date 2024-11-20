@@ -1,0 +1,162 @@
+/* Main container for the forum */
+.forum-container {
+    padding: 30px;
+    font-family: 'Arial', sans-serif;
+    background-color: #ecf0f1; /* Light gray background */
+    min-height: 100vh;
+  }
+  
+  /* Heading style */
+  .forum-container h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #2c3e50; /* Darker text for heading */
+    margin-bottom: 30px;
+    animation: fadeIn 1s ease-out;
+  }
+  
+  /* Section that holds all posts */
+  .forum-posts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 50px;
+  }
+  
+  /* Card for each post */
+  .post-card {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 700px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    opacity: 0;
+    animation: fadeInPost 0.5s forwards;
+  }
+  
+  /* Hover effect for the post card */
+  .post-card:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+    background-color: #f9f9f9; /* Slightly lighter background on hover */
+  }
+  
+  /* Title of each post */
+  .post-card h3 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: #34495e; /* Darker gray-blue */
+  }
+  
+  /* Content of each post */
+  .post-card p {
+    color: #7f8c8d; /* Light gray text */
+    font-size: 1.1rem;
+    margin-top: 10px;
+  }
+  
+  /* Input and button for adding a new post */
+  .new-post-section {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    animation: slideUp 0.5s ease-out;
+  }
+  
+  .new-post-section input {
+    padding: 12px;
+    margin-right: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    width: 320px;
+    transition: border-color 0.3s ease;
+    background-color: #fafafa; /* Light background for input */
+  }
+  
+  .new-post-section input:focus {
+    border-color: #3498db; /* Blue border on focus */
+    outline: none;
+  }
+  
+  .new-post-section button {
+    padding: 12px 20px;
+    background-color: #3498db; /* Blue background */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .new-post-section button:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+  }
+  
+  .new-post-section button:active {
+    background-color: #1f6c8c; /* Even darker blue on click */
+  }
+  
+  /* Loading state */
+  .loading {
+    font-size: 1.5rem;
+    color: #3498db; /* Blue color for loading text */
+    text-align: center;
+    animation: fadeIn 1s ease-out;
+  }
+  
+  /* Keyframe animations */
+  
+  /* Fade in effect for the heading */
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  /* Fade in effect for each post card */
+  @keyframes fadeInPost {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  /* Slide-up effect for the new post input section */
+  @keyframes slideUp {
+    0% {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  
+  /* Main container for the forum */
+  .forum-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-size: cover;          /* Cover the entire page */
+    background-position: center;     /* Center the image */
+    background-attachment: fixed;    /* Fixed position for parallax effect */
+    background-repeat: no-repeat;   /* Prevent repeating the image */
+    height: 100vh;                   /* Full viewport height */
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;     /* Align the content at the top */
+    align-items: center;             /* Center horizontally */
+  }
