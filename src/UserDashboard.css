@@ -632,3 +632,51 @@ main{
   .news-links:hover{
     color: var(--color-danger);
   }
+
+
+  .spinner-wrap {
+    margin: auto;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .spinner {
+    display: flex;
+    align: center;
+    justify-content: center;
+    background: #fcf9f2;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(#f5f0e1, #f5f0e1) padding-box,
+    conic-gradient(from 0deg, #ff2c2c, #fff630, #fff630, #21f524, #00d4ff, #00d4ff, #ff2c2c) border-box;
+    background-top-left: linear-gradient(black, white) 1;
+    border-radius: 50em;
+    border: 10px solid transparent;
+    transform: rotate(-45deg);
+  }
+  
+  .spinner i {
+    margin: auto;
+    color: #87847b;
+    font-size: 3.2em;
+    padding: 0;
+    line-height: 0;
+    transform: rotate(45deg);
+    transition: all 1s linear;
+    animation: twitch 1s linear 3s infinite;
+  }
+  
+  @keyframes twitch {
+    0% {
+      transform: rotate(45deg);
+    }
+    50% {
+      transform: rotate(65deg);
+    }
+    100% {
+      transform: rotate(45deg);
+    }
+  }

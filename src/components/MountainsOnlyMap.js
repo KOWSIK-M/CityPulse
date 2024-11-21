@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { MapContainer, TileLayer, Polyline } from 'react-leaflet';
+import { MapContainer, TileLayer, Circle } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import RecenterMap from './RecenterMap';
 
-const RoadsOnlyMap = () => {
+const MountainsOnlyMap = () => {
   const [center, setCenter] = useState([20, 0]); // Default location
-  const [roads, setRoads] = useState([]);
+  const [mountains, setMountains] = useState([]);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -21,22 +21,24 @@ const RoadsOnlyMap = () => {
   }, []);
 
   useEffect(() => {
-    const fetchRoads = async () => {
-      // Fetch only roads (highway="primary" for example, you can modify the filter)
-      const query = `[out:json];way["highway"](bbox);out geom;`;
+    const fetchMountains = async () => {
+      const query = `[out:json];node["natural"="peak"](bbox);out;`;
       const url = `https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`;
 
       try {
         const response = await fetch(url);
         const data = await response.json();
-        const roadPolylines = data.elements.map(element => element.geometry.map(point => [point.lat, point.lon]));
-        setRoads(roadPolylines);
+        const mountainPoints = data.elements.map((element) => ({
+          position: [element.lat, element.lon],
+          name: element.tags?.name || 'Unknown Peak',
+        }));
+        setMountains(mountainPoints);
       } catch (error) {
-        console.error('Error fetching roads:', error);
+        console.error('Error fetching mountains:', error);
       }
     };
 
-    fetchRoads();
+    fetchMountains();
   }, []);
 
   return (
@@ -46,11 +48,19 @@ const RoadsOnlyMap = () => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
       />
       <RecenterMap center={center} />
-      {roads.map((polyline, idx) => (
-        <Polyline key={idx} positions={polyline} color="gray" weight={3} />
+      {mountains.map((mountain, idx) => (
+        <Circle
+          key={idx}
+          center={mountain.position}
+          radius={100}
+          color="brown"
+          fillOpacity={0.5}
+        >
+          <title>{mountain.name}</title>
+        </Circle>
       ))}
     </MapContainer>
   );
 };
 
-export default RoadsOnlyMap;
+export default MountainsOnlyMap;

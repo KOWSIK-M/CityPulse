@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './UserDashboard.css'
 import Logo from './images/logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRightFromBracket, faBars, faBorderAll, faCamera, faComments, faFile, faFlag, faGear, faMap, faMoon, faMountainCity, faNewspaper, faNoteSticky, faSun, faUser, faVihara, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRightFromBracket, faBars, faBorderAll, faCamera, faComments, faFile, faFlag, faGear, faMap, faMoon, faMountainCity, faNewspaper, faNoteSticky, faRoute, faSun, faUser, faVihara, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Link, NavLink } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
 import CityNews from './components/CityNews';
@@ -17,6 +17,8 @@ import CityImages from './components/CityImages';
 import TouristPlaces from './components/TouristPlaces';
 import Profile from './components/Profile';
 import Navigate from './components/Navigate';
+import Compass from './components/Compass';
+import AllMaps from './components/AllMaps';
 
 const ButtonStyles = {
   shapeRendering: "geometricPrecision",
@@ -130,6 +132,8 @@ export default function UserDashboard() {
         return <Dashboard />;
       case 'news':
         return <CityNews cityNews={cityNews} />;
+      case 'all-maps':
+          return <AllMaps />;
       case 'forum':
         return <Forum />;
       case 'views':
@@ -193,11 +197,17 @@ export default function UserDashboard() {
             </NavLink>
 
 
-            <NavLink onClick={() => setActiveSection('navigate')}>
+            <NavLink onClick={() => setActiveSection('all-maps')}>
               <span className="icons">
                 <FontAwesomeIcon icon={faMap} />
               </span>
-              <h3>Map</h3>
+              <h3>Maps</h3>
+            </NavLink>
+            <NavLink onClick={() => setActiveSection('navigate')}>
+              <span className="icons">
+                <FontAwesomeIcon icon={faRoute} />
+              </span>
+              <h3>CityHop</h3>
             </NavLink>
             <NavLink to="/">
               <span className="icons">
@@ -317,6 +327,9 @@ export default function UserDashboard() {
               </Marker>
             </MapContainer>
 
+          </div>
+          <div className='map-right'>
+            <Compass/>
           </div>
         </div>
       </div>
