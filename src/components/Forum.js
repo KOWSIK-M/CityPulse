@@ -1,5 +1,8 @@
+import { faCompass } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState, useEffect } from 'react';
 import './Forum.css';
+import Loader from './Loader';
 
 function Forum() {
   const [posts, setPosts] = useState([]);
@@ -27,7 +30,9 @@ function Forum() {
   };
 
   if (loading) {
-    return <div className="loading">Loading posts...</div>; // Display a loading message
+    return (
+		<Loader/>
+    );
   }
 
   return (
@@ -58,4 +63,4 @@ function Forum() {
   );
 }
 
-export default Forum;  // Keep only this one instance of export default
+export default Forum;

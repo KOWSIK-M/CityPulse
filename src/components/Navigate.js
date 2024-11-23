@@ -97,8 +97,8 @@ export default function Navigate() {
         onClick={clearRoutes}
         style={{
           position: "absolute",
-          top: 30,
-          left: 280,
+          top: 140,
+          right:320,
           zIndex: 1000,
           padding: "10px 20px",
           backgroundColor: "#ff5733",
@@ -110,7 +110,8 @@ export default function Navigate() {
       >
         Clear Routes
       </button>
-      <div id="map" style={{ width: "100%", height: "100vh" }} />
+      <div id="map" style={{ width: "100%", height: "100vh",marginTop:"5em" }} >
+        </div>
     </div>
   );
 }

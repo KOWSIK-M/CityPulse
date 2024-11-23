@@ -33,7 +33,9 @@
   .stats-list li, .updates-list li {
     margin-bottom: 0.5rem;
   }
-  
+  p{
+    color: var(--cardbg-dark);
+  }
 
   /* ==================================*/
 

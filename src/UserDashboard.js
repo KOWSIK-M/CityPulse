@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import './UserDashboard.css'
 import Logo from './images/logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRightFromBracket, faBars, faBorderAll, faCamera, faComments, faFile, faFlag, faGear, faMap, faMoon, faMountainCity, faNewspaper, faNoteSticky, faRoute, faSun, faUser, faVihara, faXmark } from '@fortawesome/free-solid-svg-icons';
-import { Link, NavLink } from 'react-router-dom';
+import { faArrowRightFromBracket, faBars, faBorderAll, faCamera, faCity, faComments, faMap, faMoon, faMountainCity, faNewspaper, faRoute, faStar, faSun, faUser, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { NavLink } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
 import CityNews from './components/CityNews';
 import Clock from './components/Clock';
@@ -19,6 +19,12 @@ import Profile from './components/Profile';
 import Navigate from './components/Navigate';
 import Compass from './components/Compass';
 import AllMaps from './components/AllMaps';
+import Loader from './components/Loader';
+import SearchInCity from './components/SearchInCity';
+import CityMap from './components/CityMap';
+import ChatBot from './components/ChatBot';
+import ScrollTop from './components/ScrollTop';
+import Map1 from './components/map1';
 
 const ButtonStyles = {
   shapeRendering: "geometricPrecision",
@@ -68,7 +74,7 @@ export default function UserDashboard() {
     };
 
     fetchData();
-  }, []);
+  }, [location]);
 
 
   useEffect(() => {
@@ -124,7 +130,7 @@ export default function UserDashboard() {
   }, []);
 
   if (loading) {
-    return <div className="loading">Loading Data...</div>;
+    return <Loader/>;
   }
   const renderSection = () => {
     switch (activeSection) {
@@ -141,9 +147,15 @@ export default function UserDashboard() {
       case 'tourist':
         return <TouristPlaces touristPlaces={touristPlaces} />;
       case 'profile':
-        return <Profile />
+        return <Profile />;
       case 'navigate':
-        return <Navigate />
+        return <div className='card-dashboard'><h2>Pin a Place where you want to go</h2><h3>Route Directions + Dynamic Route Simulation + Time Estimation with Distance</h3><Navigate /></div>
+      case 'mycity':
+        return <SearchInCity/>;
+      case 'feedback':
+        return <CityMap/>;
+      case 'map1':
+        return <Map1/>;
       default:
         return <Dashboard />;
     }
@@ -189,7 +201,7 @@ export default function UserDashboard() {
           </div>
 
           <div className="sidebar">
-            <NavLink onClick={() => setActiveSection('dashboard')}>
+            <NavLink className='navlinks' onClick={() => setActiveSection('dashboard')}>
               <span className="icons">
                 <FontAwesomeIcon icon={faBorderAll} />
               </span>
@@ -197,62 +209,61 @@ export default function UserDashboard() {
             </NavLink>
 
 
-            <NavLink onClick={() => setActiveSection('all-maps')}>
+            <NavLink className='navlinks' onClick={() => setActiveSection('all-maps')}>
               <span className="icons">
                 <FontAwesomeIcon icon={faMap} />
               </span>
               <h3>Maps</h3>
             </NavLink>
-            <NavLink onClick={() => setActiveSection('navigate')}>
+            <NavLink className='navlinks' onClick={() => setActiveSection('navigate')}>
               <span className="icons">
                 <FontAwesomeIcon icon={faRoute} />
               </span>
               <h3>CityHop</h3>
             </NavLink>
-            <NavLink to="/">
+            <NavLink className='navlinks' onClick={() => setActiveSection('mycity')}>
               <span className="icons">
-                <FontAwesomeIcon icon={faComments} />
+                <FontAwesomeIcon icon={faCity} />
               </span>
-              <h3>Feedback</h3>
-              <span className="feedback-count">26</span>
+              <h3>My City</h3>
             </NavLink>
-            <NavLink onClick={() => setActiveSection('news')}>
+            <NavLink className='navlinks' onClick={() => setActiveSection('feedback')}>
+              <span className="icons">
+                <FontAwesomeIcon icon={faStar} />
+              </span>
+              <h3>City Vistas</h3>
+            </NavLink>
+            <NavLink className='navlinks' onClick={() => setActiveSection('news')}>
               <span className="icons">
                 <FontAwesomeIcon icon={faNewspaper} />
               </span>
               <h3>News</h3>
             </NavLink>
-            <NavLink onClick={() => setActiveSection('forum')}>
+            <NavLink className='navlinks' onClick={() => setActiveSection('forum')}>
               <span className="icons">
-                <FontAwesomeIcon icon={faNoteSticky} />
+                <FontAwesomeIcon icon={faComments} />
               </span>
-              <h3>Community Forum</h3>
+              <h3>The Hub</h3>
             </NavLink>
-            <NavLink onClick={() => setActiveSection('views')}>
+            <NavLink className='navlinks' onClick={() => setActiveSection('views')}>
               <span className="icons">
                 <FontAwesomeIcon icon={faCamera} />
               </span>
               <h3>Clicks</h3>
             </NavLink>
-            <NavLink onClick={() => setActiveSection('tourist')}>
+            <NavLink className='navlinks' onClick={() => setActiveSection('tourist')}>
               <span className="icons">
                 <FontAwesomeIcon icon={faMountainCity} />
               </span>
               <h3>Viewpoints</h3>
             </NavLink>
-            <NavLink onClick={() => setActiveSection('profile')}>
+            <NavLink className='navlinks' onClick={() => setActiveSection('profile')}>
               <span className="icons">
                 <FontAwesomeIcon icon={faUser} />
               </span>
               <h3>Profile</h3>
             </NavLink>
-            <NavLink to="/">
-              <span className="icons">
-                <FontAwesomeIcon icon={faGear} />
-              </span>
-              <h3>Settings</h3>
-            </NavLink>
-            <NavLink to="/">
+            <NavLink className='navlinks' to="/">
               <span className="icons">
                 <FontAwesomeIcon icon={faArrowRightFromBracket} />
               </span>
@@ -308,6 +319,8 @@ export default function UserDashboard() {
               </div>
             </div>
 
+            <ChatBot/>
+            <ScrollTop/>
 
             {/*-------------End Of Top------------------- */}
           </div>
@@ -326,11 +339,17 @@ export default function UserDashboard() {
                 <Popup>Your current location</Popup>
               </Marker>
             </MapContainer>
-
+            <div className="card-dashboard" style={{marginTop:"10px",textDecoration:"none"}}>
+              <NavLink onClick={() => setActiveSection('map1')} style={{textDecoration:"none",fontSize:"1.7rem",color:"#ff7782"}}>
+                Want to see globe view?
+              </NavLink>
+              
+            </div>
+            <div className="card-dashboard" style={{marginTop:"10px",textDecoration:"none"}}>
+                <Compass/>
+              </div>
           </div>
-          <div className='map-right'>
-            <Compass/>
-          </div>
+          
         </div>
       </div>
     </div>

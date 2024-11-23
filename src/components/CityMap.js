@@ -2,12 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
-import icon from '../images/palceholder.jpeg';
+import markerIcon from 'leaflet/dist/images/marker-icon.png';
+import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 
 const customIcon = new L.Icon({
-  iconUrl: icon,
-  iconSize: [30, 45],
-  iconAnchor: [15, 45],
+  iconUrl: markerIcon,
+    shadowUrl: markerShadow,
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
 });
 
 const RecenterMap = ({ location }) => {
@@ -85,6 +88,12 @@ const CityMap = () => {
   };
 
   return (
+    <div className='card-dashboard'>
+      <h2>Pin any place you wish</h2><h3>and Give your valuable feedbacks</h3>
+      <h3>We Value your Opinion 😊</h3>
+
+      <p>Please provide honest and accurate feedback. Avoid posting fake reviews, as they can negatively impact the city's reputation.</p>
+      <p>After updating, reviews will be sent to your email<span style={{color:"#ff7782"}}> Please check it out later</span></p>
     <MapContainer
       center={userLocation}
       zoom={13}
@@ -132,6 +141,7 @@ const CityMap = () => {
         </Marker>
       ))}
     </MapContainer>
+    </div>
   );
 };
 

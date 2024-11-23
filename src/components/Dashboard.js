@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import './Dashboard.css';
@@ -10,6 +9,8 @@ import TouristPlaces from './TouristPlaces';
 
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+import Loader from './Loader';
+import { NavLink } from 'react-router-dom';
 
 const Dashboard = () => {
   const cityCenter = [17.3850, 78.4867];
@@ -19,8 +20,6 @@ const Dashboard = () => {
   const [aqi, setAqi] = useState(null);
   const [loading, setLoading] = useState(true);
   const [nearbyPlaces, setNearbyPlaces] = useState([]);
-  const [cityNews, setCityNews] = useState([]);
-  const [cityImages, setCityImages] = useState([]);
   const [touristPlaces, setTouristPlaces] = useState([]);
 
   const apiKey = "b848742b8067474bbc4a922dc41b0a4a"; // OpenWeather API key
@@ -75,16 +74,6 @@ const Dashboard = () => {
         const nearbyCitiesData = await nearbyCitiesResponse.json();
         setNearbyPlaces(nearbyCitiesData.elements);
 
-        // Fetch News for Vijayawada
-        const newsResponse = await fetch(`https://newsapi.org/v2/everything?q=Vijayawada&apiKey=fa198e3599464930b2eccad7a8fdb736`);
-        const newsData = await newsResponse.json();
-        setCityNews(newsData.articles);
-
-        // Fetch City Images
-        const imagesResponse = await fetch(`https://api.unsplash.com/search/photos?query=Vijayawada&client_id=4rDEFf3xFKi_8VeKPMVWjdA21d73zo0lpMxD1DGmerQ`);
-        const imagesData = await imagesResponse.json();
-        setCityImages(imagesData.results);
-
         // Fetch Tourist Places using OpenStreetMap Overpass API
         const overpassUrl = `https://overpass-api.de/api/interpreter?data=[out:json];(node["tourism"](around:1000,${location[0]},${location[1]});way["tourism"](around:10000,${location[0]},${location[1]});relation["tourism"](around:1000,${location[0]},${location[1]}););out;`;
         const touristResponse = await fetch(overpassUrl);
@@ -102,14 +91,14 @@ const Dashboard = () => {
   }, [city, location, apiKey, rapidApiKey]);
 
   if (loading) {
-    return <div className="loading">🌤️ Loading Data...</div>;
+    return <Loader/>;
   }
 
   return (
     <div>
       <h1>Dashboard</h1>
       <h3>Hello, my fellow Vijayawada resident!</h3>
-      <p>Know about your City more</p>
+      <h3>Know about your City more with <span style={{fontWeight:"800"}}>City<span style={{color:"#ff7782"}}>Pulse</span></span></h3>
 
       <section className="dashboard-content">
         <CityStats location={location} cityInfo={cityInfo} customIcon={customIcon} />
@@ -119,7 +108,7 @@ const Dashboard = () => {
       <div className="ag-format-container">
         <div className="ag-courses_box">
           <div className="ag-courses_item">
-            <a href="/" className="ag-courses-item_link">
+            <NavLink className="ag-courses-item_link">
               <div className="ag-courses-item_bg"></div>
               <div className="ag-courses-item_title">Weather</div>
               <div className="ag-courses-item_date-box">Temperature:
@@ -127,11 +116,11 @@ const Dashboard = () => {
                   <div>{Math.round(weather.main.temp)}°C</div>
                 </span>
               </div>
-            </a>
+            </NavLink>
           </div>
 
           <div className="ag-courses_item">
-            <a href="/" className="ag-courses-item_link">
+            <NavLink className="ag-courses-item_link">
               <div className="ag-courses-item_bg"></div>
               <div className="ag-courses-item_title">Air Quality Index</div>
               <div className="ag-courses-item_date-box">AQI Level:
@@ -141,15 +130,15 @@ const Dashboard = () => {
                   </div>
                 </span>
               </div>
-            </a>
+            </NavLink>
           </div>
           
           <div className="ag-courses_item">
-            <a href="/" className="ag-courses-item_link">
+            <NavLink className="ag-courses-item_link">
               <div className="ag-courses-item_bg"></div>
               <div className="ag-courses-item_title">Community Forum</div>
-              <div className="ag-courses-item_date-box">Start: 04.11.2022</div>
-            </a>
+              <div className="ag-courses-item_date-box">Start: 07.12.2024</div>
+            </NavLink>
           </div>
         </div>
       </div>

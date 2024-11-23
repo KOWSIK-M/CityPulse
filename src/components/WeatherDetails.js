@@ -1,6 +1,7 @@
 // src/Dashboard/WeatherDetails.jsx
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import Loader from './Loader';
 import './WeatherDetails.css';
 
 function WeatherDetails() {
@@ -36,7 +37,7 @@ function WeatherDetails() {
   };
 
   if (loading) {
-    return <div className="loading">🌤️ Loading Weather...</div>;
+    return <Loader/>;
   }
 
   if (!weather || weather.cod !== 200) {

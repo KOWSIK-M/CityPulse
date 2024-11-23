@@ -5,10 +5,12 @@ import '../UserDashboard.css';
 import AQI from './AQI';
 import Biodiversities from './Biodiversities';
 import CitySearchMap from './CitySearch';
+import Climate from './Climate';
 import Deforestation from './Deforestation';
 import ForestsOnlyMap from './ForestsOnlyMap';
 import LakesOnlyMap from './LakesOnlyMap';
 import MountainsOnlyMap from './MountainsOnlyMap';
+import NewsOnlyMaps from './NewsOnlyMaps';
 import RiversOnlyMap from './Rivers';
 import RoadsOnlyMap from './Roads';
 
@@ -31,7 +33,9 @@ export default function AllMaps() {
     mountains: <MountainsOnlyMap/>,
     biodiversity: <Biodiversities/>,
     aqi: <AQI/>,
-    deforestation: <Deforestation/>
+    deforestation: <Deforestation/>,
+    climate: <Climate/>,
+    news: <NewsOnlyMaps/>
   };
 
   // If a component is selected, render it
@@ -49,6 +53,7 @@ export default function AllMaps() {
   // Default view
   return (
     <div>
+      <h2>Explore all our maps from <span style={{fontWeight:"800"}}>City<span style={{color:"#ff7782"}}>Pulse</span></span></h2>
       <div className="ag-format-container">
         <div className="ag-courses_box">
           <div className="ag-courses_item">
@@ -57,8 +62,19 @@ export default function AllMaps() {
               onClick={() => setCurrentComponent('search')}
             >
               <div className="ag-courses-item_bg"></div>
-              <div className="ag-courses-item_title">Search</div>
-              <div className="ag-courses-item_date-box">A City you want</div>
+              <div className="ag-courses-item_title">Search Cities</div>
+              <div className="ag-courses-item_date-box">Wanna Explore new cities 🧐</div>
+            </div>
+          </div>
+
+          <div className="ag-courses_item">
+            <div
+              className="ag-courses-item_link"
+              onClick={() => setCurrentComponent('forest')}
+            >
+              <div className="ag-courses-item_bg"></div>
+              <div className="ag-courses-item_title">Forests</div>
+              <div className="ag-courses-item_date-box">Find Peace in the Mother Nature🌳</div>
             </div>
           </div>
 
@@ -87,16 +103,6 @@ export default function AllMaps() {
             </div>
           </div>
 
-          <div className="ag-courses_item">
-            <div
-              className="ag-courses-item_link"
-              onClick={() => setCurrentComponent('forest')}
-            >
-              <div className="ag-courses-item_bg"></div>
-              <div className="ag-courses-item_title">Forests</div>
-              <div className="ag-courses-item_date-box">Let the inner you find Peace🌳</div>
-            </div>
-          </div>
 
           <div className="ag-courses_item">
             <div
@@ -115,7 +121,7 @@ export default function AllMaps() {
             >
               <div className="ag-courses-item_bg"></div>
               <div className="ag-courses-item_title">Mountains</div>
-              <div className="ag-courses-item_date-box">Ready for Hiking Partner?!</div>
+              <div className="ag-courses-item_date-box">Ready for Hiking Partner?! 🚵</div>
             </div>
           </div>
           
@@ -149,6 +155,28 @@ export default function AllMaps() {
               <div className="ag-courses-item_bg"></div>
               <div className="ag-courses-item_title">Deforestation</div>
               <div className="ag-courses-item_date-box">Evil Humans 😈 vs Poor Trees 🥲</div>
+            </div>
+          </div>
+
+          <div className="ag-courses_item">
+            <div
+              className="ag-courses-item_link"
+              onClick={() => setCurrentComponent('climate')}
+            >
+              <div className="ag-courses-item_bg"></div>
+              <div className="ag-courses-item_title">Climate</div>
+              <div className="ag-courses-item_date-box">Know how the nature works ⛅</div>
+            </div>
+          </div>
+
+          <div className="ag-courses_item">
+            <div
+              className="ag-courses-item_link"
+              onClick={() => setCurrentComponent('news')}
+            >
+              <div className="ag-courses-item_bg"></div>
+              <div className="ag-courses-item_title">News</div>
+              <div className="ag-courses-item_date-box">Wait! A lot is happening out there 🤔</div>
             </div>
           </div>
         </div>
