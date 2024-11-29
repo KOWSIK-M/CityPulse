@@ -1,6 +1,6 @@
 /* Fonts */
 
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
 
 /* Root variables */
 
@@ -40,7 +40,6 @@
   --box-shadow: 0 2rem 3rem var(--color-light);
 }
 
-
 * {
   margin: 0;
   padding: 0;
@@ -73,7 +72,6 @@ body {
   gap: 1.8rem;
   grid-template-columns: 14rem auto 23rem;
 }
-
 
 .img-dashboard {
   display: block;
@@ -116,8 +114,8 @@ small {
 }
 
 .profile-photo {
-  width: 2.8rem;
-  height: 2.8rem;
+  width: 3.2rem;
+  height: 3.2rem;
   border-radius: 50%;
   overflow: hidden;
 }
@@ -126,7 +124,7 @@ small {
   color: var(--color-info-dark);
 }
 
-p{
+p {
   color: var(--color-dark);
 }
 
@@ -164,7 +162,6 @@ aside .top {
 aside .logo {
   display: flex;
   gap: 0.8rem;
-
 }
 
 aside .logo img {
@@ -219,21 +216,21 @@ aside .sidebar a.active {
   margin-left: 0;
 }
 
-
 aside .sidebar .navlinks.active:hover::before {
-  content: '';
+  content: "";
   width: 6px;
   height: 100%;
   background: var(--color-primary);
   transition: all 800ms ease;
 }
 
-.navlinks:hover{
+.navlinks:hover {
   background: var(--color-light);
   color: var(--color-primary);
   transition: all 300ms ease;
 }
-.navlinks:hover span, .navlinks:hover h3{
+.navlinks:hover span,
+.navlinks:hover h3 {
   color: var(--color-primary);
   font-weight: 600;
   transition: all 300ms ease;
@@ -312,12 +309,11 @@ aside .sidebar .feedback-count {
 main {
   margin-left: 8rem;
   margin-top: 8rem;
-
 }
 
 /* ============================= Media Queries ========================== */
 
-@media screen and (max-width : 768px) {
+@media screen and (max-width: 768px) {
   .container-dashboard {
     width: 100%;
     grid-template-columns: 1fr;
@@ -340,7 +336,6 @@ main {
     to {
       left: 0;
     }
-
   }
 
   aside .logo {
@@ -424,14 +419,14 @@ main {
   width: 12rem;
   position: relative;
   padding: 2px 23px;
-  background: #FFFFFF;
+  background: #ffffff;
   font-size: 17px;
   font-weight: 500;
   color: #000000;
   border: 3px solid #0e3a3a;
   border-radius: 8px;
   box-shadow: 0 0 0 #fec1958c;
-  transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .star-1 {
@@ -475,7 +470,7 @@ main {
   height: auto;
   filter: drop-shadow(0 0 0 #fffdef);
   z-index: -5;
-  transition: all .8s cubic-bezier(0, 0.4, 0, 1.01);
+  transition: all 0.8s cubic-bezier(0, 0.4, 0, 1.01);
 }
 
 .star-5 {
@@ -486,7 +481,7 @@ main {
   height: auto;
   filter: drop-shadow(0 0 0 #fffdef);
   z-index: -5;
-  transition: all .6s cubic-bezier(0, 0.4, 0, 1.01);
+  transition: all 0.6s cubic-bezier(0, 0.4, 0, 1.01);
 }
 
 .star-6 {
@@ -497,14 +492,14 @@ main {
   height: auto;
   filter: drop-shadow(0 0 0 #fffdef);
   z-index: -5;
-  transition: all .8s ease;
+  transition: all 0.8s ease;
 }
 
 .premium-btn:hover {
   background: #0e3a3a;
-  color: #FFFFFF;
+  color: #ffffff;
   box-shadow: 0 0 25px #0e3a3a;
-  border: 3px solid #FFF;
+  border: 3px solid #fff;
 }
 
 .premium-btn:hover .star-1 {
@@ -568,7 +563,7 @@ main {
 }
 
 .fil0 {
-  fill: #FFFDEF
+  fill: #fffdef;
 }
 
 .map-right {
@@ -688,7 +683,6 @@ main {
   color: var(--color-danger);
 }
 
-
 .spinner-wrap {
   margin: auto;
   width: 100vw;
@@ -707,7 +701,17 @@ main {
   width: 50px;
   height: 50px;
   background: linear-gradient(#f5f0e1, #f5f0e1) padding-box,
-    conic-gradient(from 0deg, #ff2c2c, #fff630, #fff630, #21f524, #00d4ff, #00d4ff, #ff2c2c) border-box;
+    conic-gradient(
+        from 0deg,
+        #ff2c2c,
+        #fff630,
+        #fff630,
+        #21f524,
+        #00d4ff,
+        #00d4ff,
+        #ff2c2c
+      )
+      border-box;
   background-top-left: linear-gradient(black, white) 1;
   border-radius: 50em;
   border: 10px solid transparent;
@@ -837,7 +841,6 @@ main {
 }
 
 @keyframes ringStroke42 {
-
   from,
   to {
     stroke-dashoffset: 452;
@@ -851,7 +854,6 @@ main {
 }
 
 @keyframes tick42 {
-
   from,
   3%,
   47%,
@@ -874,11 +876,12 @@ main {
   background-color: var(--color-white);
   border-radius: 8px;
   box-shadow: var(--box-shadow);
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
 }
 
 /* Label styles */
-.category-label, .query-label {
+.category-label,
+.query-label {
   font-size: 1.2em;
   font-weight: bold;
   color: var(--color-dark);
@@ -930,5 +933,11 @@ main {
 /* Placeholder styling for inputs */
 .query-input::placeholder {
   color: #aaa;
+  font-style: italic;
+}
+
+h3 .city {
+  color: var(--color-primary);
+  font-weight: 700;
   font-style: italic;
 }

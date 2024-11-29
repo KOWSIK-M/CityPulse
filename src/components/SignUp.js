@@ -1,12 +1,62 @@
-import React from 'react';
-import './SignUp.css';
-import GoogleSignIn from './GoogleSignIn';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faEnvelope, faLock, faCity, faCalendar } from '@fortawesome/free-solid-svg-icons';
-import signupImg from '../images/signup-image.jpg';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import "./SignUp.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faUser,
+  faEnvelope,
+  faLock,
+  faCity,
+  faCalendar,
+  faPhone,
+} from "@fortawesome/free-solid-svg-icons";
+import signupImg from "../images/signup-image.jpg";
+import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
+
+import axiosInstance from "./AxiosInstance"; // Adjust path if needed
 
 export default function SignUp(props) {
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    contact: "",
+    dob: "",
+    gender: "",
+    city: "",
+    password: "",
+    re_pass: "",
+  });
+
+  const navigate = useNavigate(); // Initialize navigate
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Check if passwords match
+    if (formData.password !== formData.re_pass) {
+      alert("Passwords do not match!");
+      return;
+    }
+
+    try {
+      // Send only required data to the server
+      const { re_pass, ...dataToSend } = formData;
+      const response = await axiosInstance.post("/users/register", {
+        ...dataToSend,
+      });
+
+      alert(response.data.success);
+      // Redirect to login page after successful registration
+      navigate("/CityPulse/userlogin"); // Redirect to the /userlogin page
+    } catch (error) {
+      alert(error.response?.data?.success || "Registration failed!");
+    }
+  };
+
   return (
     <div style={{ height: "100vh" }}>
       <div className="main">
@@ -15,67 +65,178 @@ export default function SignUp(props) {
             <div className="signup-content">
               <div className="signup-form">
                 <h2 className="form-title">Sign up</h2>
-                <form method="POST" className="register-form" id="register-form">
+                <form
+                  method="POST"
+                  className="register-form"
+                  id="register-form"
+                  onSubmit={handleSubmit}
+                >
                   <div className="form-group">
-                    <label htmlFor="name"><FontAwesomeIcon icon={faUser} className="icon" /></label>
-                    <input type="text" name="name" id="name" placeholder="Your Name" />
+                    <label htmlFor="name">
+                      <FontAwesomeIcon icon={faUser} className="icon" />
+                      Username
+                    </label>
+                    <input
+                      type="text"
+                      name="username"
+                      id="username"
+                      placeholder="Your Name"
+                      value={formData.username}
+                      onChange={handleInputChange}
+                      required
+                    />
                   </div>
                   <div className="form-group">
-                    <label htmlFor="email"><FontAwesomeIcon icon={faEnvelope} className="icon" /></label>
-                    <input type="email" name="email" id="email" placeholder="Your Email" />
+                    <label htmlFor="email">
+                      <FontAwesomeIcon icon={faEnvelope} className="icon" />
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      id="email"
+                      placeholder="Your Email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      required
+                    />
                   </div>
                   <div className="form-group">
-                    <label htmlFor="dob"><FontAwesomeIcon icon={faCalendar} className="icon" /></label>
-                    <input type="date" name="dob" id="dob" placeholder="Date of birth" />
+                    <label htmlFor="contact">
+                      <FontAwesomeIcon icon={faPhone} className="icon" />
+                      Contact No.
+                    </label>
+                    <input
+                      type="text"
+                      name="contact"
+                      id="contact"
+                      placeholder="Your Contact no."
+                      value={formData.contact}
+                      onChange={handleInputChange}
+                      required
+                    />
                   </div>
-                  
-                  
                   <div className="form-group">
-                    <div>
-                    <p>Gender</p>
-                    
-                    </div>
+                    <label htmlFor="dob">
+                      <FontAwesomeIcon icon={faCalendar} className="icon" />
+                      DOB
+                    </label>
+                    <input
+                      type="date"
+                      name="dob"
+                      id="dob"
+                      value={formData.dob}
+                      onChange={handleInputChange}
+                      required
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="gender">Gender</label>
                     <div className="gender-options">
-                      <label htmlFor="gender-male" className='label-gender'></label>
-                        <input type="radio" name="gender" id="gender-male" value="male" /> Male
-                      
-                      <label htmlFor="gender-female" className='label-gender'></label>
-                        <input type="radio" name="gender" id="gender-female" value="female" /> Female
-                      
-                      <label htmlFor="gender-other" className='label-gender'></label>
-                        <input type="radio" name="gender" id="gender-other" value="other" /> Other
-                      
+                      <label>
+                        <input
+                          type="radio"
+                          name="gender"
+                          value="Male"
+                          onChange={handleInputChange}
+                          required
+                        />
+                        Male
+                      </label>
+                      <label>
+                        <input
+                          type="radio"
+                          name="gender"
+                          value="Female"
+                          onChange={handleInputChange}
+                        />
+                        Female
+                      </label>
+                      <label>
+                        <input
+                          type="radio"
+                          name="gender"
+                          value="Other"
+                          onChange={handleInputChange}
+                        />
+                        Other
+                      </label>
                     </div>
                   </div>
                   <div className="form-group">
-                    <label htmlFor="city"><FontAwesomeIcon icon={faCity} className="icon" /></label>
-                    <input type="text" name="city" id="city" placeholder=" City" />
+                    <label htmlFor="city">
+                      <FontAwesomeIcon icon={faCity} className="icon" />
+                      City
+                    </label>
+                    <input
+                      type="text"
+                      name="city"
+                      id="city"
+                      placeholder="City"
+                      value={formData.city}
+                      onChange={handleInputChange}
+                      required
+                    />
                   </div>
                   <div className="form-group">
-                    <label htmlFor="pass"><FontAwesomeIcon icon={faLock} className="icon" /></label>
-                    <input type="password" name="pass" id="pass" placeholder="Password" />
+                    <label htmlFor="password">
+                      <FontAwesomeIcon icon={faLock} className="icon" />
+                      Password
+                    </label>
+                    <input
+                      type="password"
+                      name="password"
+                      id="password"
+                      placeholder="Password"
+                      value={formData.password}
+                      onChange={handleInputChange}
+                      required
+                    />
                   </div>
                   <div className="form-group">
-                    <label htmlFor="re-pass"><FontAwesomeIcon icon={faLock} className="icon" /> </label>
-                    <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password" />
+                    <label htmlFor="re_pass">
+                      <FontAwesomeIcon icon={faLock} className="icon" />
+                      Re-Enter Password
+                    </label>
+                    <input
+                      type="password"
+                      name="re_pass"
+                      id="re_pass"
+                      placeholder="Repeat your password"
+                      value={formData.re_pass}
+                      onChange={handleInputChange}
+                      required
+                    />
                   </div>
-
                   <div className="form-group">
                     <label htmlFor="agree-term" className="label-agree-term">
-                      <span>
-                    <input type="checkbox" name="agree-term" id="agree-term" className="agree-term" /></span>I agree to all statements in 
-                      <a href="/CityPulse/terms&conditions" className="term-service"> Terms of service</a>
+                      <input
+                        type="checkbox"
+                        name="agree-term"
+                        id="agree-term"
+                        className="agree-term"
+                        required
+                      />
+                      I agree to all statements in
+                      <Link to="/CityPulse/terms&conditions">
+                        Terms of service
+                      </Link>
                     </label>
                   </div>
                   <div className="form-group form-button">
-                    <input type="submit" name="signup" id="signup" className="form-submit" value="Register" />
+                    <button type="submit" className="form-submit">
+                      Register
+                    </button>
                   </div>
                 </form>
               </div>
               <div className="signup-image">
-                <figure><img src={signupImg} alt="sign up" /></figure>
-                <GoogleSignIn/>
-                <Link to="/CityPulse/userlogin" className="signup-image-link">I am already a member</Link>
+                <figure>
+                  <img src={signupImg} alt="sign up" />
+                </figure>
+                <Link to="/CityPulse/userlogin" className="signup-image-link">
+                  I am already a member
+                </Link>
               </div>
             </div>
           </div>
