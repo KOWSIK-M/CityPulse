@@ -1,17 +1,36 @@
 import React, { useState } from "react";
 import "./Login.css";
-import GoogleSignIn from "./GoogleSignIn";
 import logo from "../images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "./AxiosInstance.js";
+import Toast from "./Toast";
 
 export default function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [toastMessage, setToastMessage] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (!email) {
+      setToastMessage({
+        message: "Please fill in your email.",
+        type: "error", // Use error type for missing fields
+        color: "red",
+      });
+      return;
+    }
+
+    if (!password) {
+      setToastMessage({
+        message: "Please fill in your password.",
+        type: "error",
+        color: "red",
+      });
+      return;
+    }
 
     try {
       const response = await axiosInstance.post("/users/login", {
@@ -28,12 +47,24 @@ export default function Login(props) {
         navigate("/CityPulse/userDashboard");
       }
     } catch (error) {
-      alert("Login failed. Please check your credentials.");
+      setToastMessage({
+        message: "Login failed. Please check your credentials.",
+        type: "error",
+        color: "red",
+      });
     }
   };
 
   return (
     <div style={{ height: "100vh" }}>
+      {toastMessage && (
+        <Toast
+          message={toastMessage.message}
+          type={toastMessage.type}
+          color={toastMessage.color}
+          onClose={() => setToastMessage(null)}
+        />
+      )}
       <form className="form_container" onSubmit={handleSubmit}>
         <div className="logo_container">
           <img
@@ -88,9 +119,11 @@ export default function Login(props) {
           <hr className="line" />
         </div>
         <p>
+          <Link to="/CityPulse/ForgotPassword">Forgot Password?</Link>
+        </p>{" "}
+        <p>
           New User? <Link to="/CityPulse/signup">SignUp</Link>
         </p>{" "}
-        Or
         <Link className="note" to="/CityPulse/terms&conditions">
           Terms of use &amp; Conditions
         </Link>
