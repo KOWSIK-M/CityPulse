@@ -13,7 +13,8 @@ axiosInstance.interceptors.request.use(
       !config.url.includes("/users/register") &&
       !config.url.includes("/users/login") &&
       !config.url.includes("/users/updateProfile") &&
-      !config.url.includes("/users/updatePassword")
+      !config.url.includes("/users/updatePassword") &&
+      !config.url.includes("/feedbacks")
     ) {
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;

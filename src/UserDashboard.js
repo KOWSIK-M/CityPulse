@@ -57,6 +57,7 @@ export default function UserDashboard() {
   const [loading, setLoading] = useState(true);
   const cityCenter = [17.385, 78.4867];
   const [location, setLocation] = useState(cityCenter);
+  const [location_now, setLocation_now] = useState(cityCenter);
   const [cityImages, setCityImages] = useState([]);
   const [touristPlaces, setTouristPlaces] = useState([]);
   const [city, setCity] = useState("Vijayawada"); // Default city
@@ -142,7 +143,7 @@ export default function UserDashboard() {
             position.coords.latitude,
             position.coords.longitude,
           ];
-          setLocation(userLocation); // Update location state
+          setLocation_now(userLocation); // Update location state
         },
         (error) => console.error("Error retrieving location:", error)
       );
@@ -535,13 +536,13 @@ export default function UserDashboard() {
               <img src={markerIcon} alt="icon" style={{ height: "20px" }}></img>
             </h3>
             <MapContainer
-              center={location}
+              center={location_now}
               zoom={12}
               style={{ height: "100%", width: "100%" }}
             >
               <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-              {location && <RecenterMap center={location} />}
-              <Marker position={location} icon={customIcon}>
+              {location_now && <RecenterMap center={location_now} />}
+              <Marker position={location_now} icon={customIcon}>
                 <Popup>Your current location</Popup>
               </Marker>
             </MapContainer>

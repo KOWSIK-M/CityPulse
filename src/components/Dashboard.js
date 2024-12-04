@@ -10,10 +10,6 @@ import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
 import Loader from "./Loader";
 import { NavLink } from "react-router-dom";
-import { toast } from "react-toastify"; // Importing react-toastify
-
-// Import Toastify CSS
-import "react-toastify/dist/ReactToastify.css";
 
 const Dashboard = () => {
   const [location, setLocation] = useState([17.385, 78.4867]); // Default city coordinates (Vijayawada)
@@ -44,17 +40,15 @@ const Dashboard = () => {
     const user = JSON.parse(localStorage.getItem("userData"));
     setUserData(user);
 
-    // If userData has city, fetch the coordinates of that city
     if (user && user.city) {
       setCity(user.city);
       fetchCityCoordinates(user.city);
     } else if (user && user.coordinates) {
       setLocation(user.coordinates);
-      setCityCoordinates(user.coordinates); // Fallback to user coordinates
+      setCityCoordinates(user.coordinates);
     }
   }, []);
 
-  // Fetch coordinates for the city
   const fetchCityCoordinates = async (cityName) => {
     const geocodeApiKey = "aae1cfd2378d26601e660d3e647710fc"; // OpenWeather API key for geo data
     const geocodeUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=5&appid=${geocodeApiKey}`;
@@ -63,24 +57,20 @@ const Dashboard = () => {
       const response = await fetch(geocodeUrl);
       const data = await response.json();
       if (data && data.length > 0) {
-        const { lat, lon } = data[0]; // Use the first city match
-
+        const { lat, lon } = data[0];
         setCityCoordinates([lat, lon]);
-        setLocation([lat, lon]); // Set the map's center to the city coordinates
+        setLocation([lat, lon]);
       } else {
         console.error("City not found");
       }
     } catch (error) {
-      toast.error("Error fetching city coordinates");
       console.error("Error fetching city coordinates:", error);
     }
   };
 
-  // Fetch city-related data (weather, AQI, etc.) when city or location changes
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch weather data
         const weatherResponse = await fetch(
           `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
         );
@@ -88,7 +78,6 @@ const Dashboard = () => {
         const weatherData = await weatherResponse.json();
         setWeather(weatherData);
 
-        // Fetch AQI data
         const aqiResponse = await fetch(
           `https://api.openweathermap.org/data/2.5/air_pollution?lat=${location[0]}&lon=${location[1]}&appid=${apiKey}`
         );
@@ -96,7 +85,6 @@ const Dashboard = () => {
         const aqiData = await aqiResponse.json();
         setAqi(aqiData);
 
-        // Fetch city info
         const cityInfoResponse = await fetch(
           `https://wft-geo-db.p.rapidapi.com/v1/geo/cities/${city}`,
           {
@@ -107,26 +95,20 @@ const Dashboard = () => {
             },
           }
         );
-        if (!cityInfoResponse.ok) throw new Error("City info API failed");
         const cityInfoData = await cityInfoResponse.json();
         setCityInfo(cityInfoData.data);
 
-        // Overpass API query for nearby cities (optional)
         const nearbyCitiesQuery = `[out:json];node["place"="city"](around:50000,${location[0]},${location[1]});out;`;
         const nearbyCitiesResponse = await fetch(
           `https://overpass-api.de/api/interpreter?data=${encodeURIComponent(
             nearbyCitiesQuery
           )}`
         );
-        if (!nearbyCitiesResponse.ok)
-          throw new Error("Nearby cities API failed");
         const nearbyCitiesData = await nearbyCitiesResponse.json();
         setNearbyPlaces(nearbyCitiesData.elements);
 
-        // Fetch Tourist Places using OpenStreetMap Overpass API
         const overpassUrl = `https://overpass-api.de/api/interpreter?data=[out:json];(node["tourism"](around:1000,${location[0]},${location[1]});way["tourism"](around:10000,${location[0]},${location[1]});relation["tourism"](around:1000,${location[0]},${location[1]}););out;`;
         const touristResponse = await fetch(overpassUrl);
-        if (!touristResponse.ok) throw new Error("Tourist places API failed");
         const touristData = await touristResponse.json();
         setTouristPlaces(
           touristData.elements.filter(
@@ -134,14 +116,12 @@ const Dashboard = () => {
           )
         );
       } catch (error) {
-        toast.error(`Error fetching data: ${error.message}`);
         console.error("Error fetching data:", error);
       } finally {
         setLoading(false);
       }
     };
 
-    // Only fetch data after location or city is set
     if (cityCoordinates[0] && cityCoordinates[1]) {
       fetchData();
     }
