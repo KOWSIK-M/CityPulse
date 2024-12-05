@@ -16,6 +16,7 @@ import UserDashboard from "./UserDashboard";
 import WeatherDetails from "./components/WeatherDetails";
 import ForgotPassword from "./ForgotPassword";
 import PasswordUpdate from "./PasswordUpdate";
+import AdminDashboard from "./AdminDashboard";
 function Website() {
   return (
     <BrowserRouter>
@@ -36,6 +37,7 @@ function Website() {
           <Route path="CityPulse/PricingPayment" element={<PricingPayment />} />
           <Route path="CityPulse/Payment" element={<Payment />} />
           <Route path="CityPulse/UserDashboard" element={<UserDashboard />} />
+          <Route path="CityPulse/AdminDashboard" element={<AdminDashboard />} />
           <Route path="CityPulse/ForgotPassword" element={<ForgotPassword />} />
           <Route path="CityPulse/PasswordUpdate" element={<PasswordUpdate />} />
           <Route path="/weather" element={<WeatherDetails />} />
