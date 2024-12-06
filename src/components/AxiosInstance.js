@@ -12,10 +12,17 @@ axiosInstance.interceptors.request.use(
     if (
       !config.url.includes("/users/register") &&
       !config.url.includes("/users/login") &&
+      !config.url.includes("/admin/login") &&
       !config.url.includes("/users/updateProfile") &&
       !config.url.includes("/users/updatePassword") &&
       !config.url.includes("/feedbacks*") &&
-      !config.url.includes("/users/count*")
+      !config.url.includes("/admin/count") &&
+      !config.url.includes("/admin/feedback-count") &&
+      !config.url.includes("/admin/allusers") &&
+      !config.url.includes("/admin/allfeedbacks") &&
+      !config.url.includes("/admin/approve/*") &&
+      !config.url.includes("/admin/unapproved") &&
+      !config.url.includes("/admin/status*")
     ) {
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;

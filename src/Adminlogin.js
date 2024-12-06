@@ -4,70 +4,51 @@ import "./Login.css";
 import logo from "./images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "./components/AxiosInstance.js";
-import Toast from "./components/Toast.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faUser } from "@fortawesome/free-solid-svg-icons";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Adminlogin() {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [toastMessage, setToastMessage] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!email) {
-      setToastMessage({
-        message: "Please fill in your email.",
-        type: "error", // Use error type for missing fields
-        color: "red",
-      });
+    if (!username) {
+      toast.error("Please fill in your username.");
       return;
     }
 
     if (!password) {
-      setToastMessage({
-        message: "Please fill in your password.",
-        type: "error",
-        color: "red",
-      });
+      toast.error("Please fill in your password.");
       return;
     }
 
     try {
-      const response = await axiosInstance.post("/users/login", {
-        email,
+      const response = await axiosInstance.post("/admin/login", {
+        username,
         password,
       });
 
       if (response.status === 200) {
-        const { token, user } = response.data; // Extract token and user details
-        // Store token and user data in localStorage
-        localStorage.setItem("token", token);
-        localStorage.setItem("userData", JSON.stringify(user));
-        // Redirect to user dashboard
-        navigate("/CityPulse/userDashboard");
+        const { token, admin } = response.data; // Extract token and admin details
+        // Store token and admin data in localStorage
+        localStorage.setItem("adminToken", token);
+        // Redirect to admin dashboard
+        navigate("/CityPulse/adminDashboard");
       }
     } catch (error) {
-      setToastMessage({
-        message: "Login failed. Please check your credentials.",
-        type: "error",
-        color: "red",
-      });
+      toast.error("Login failed. Please check your credentials.");
     }
   };
+
   return (
     <div>
+      <ToastContainer />
       <div style={{ height: "100vh" }}>
-        {toastMessage && (
-          <Toast
-            message={toastMessage.message}
-            type={toastMessage.type}
-            color={toastMessage.color}
-            onClose={() => setToastMessage(null)}
-          />
-        )}
         <form className="form_container" onSubmit={handleSubmit}>
           <div className="logo_container">
             <img
@@ -85,19 +66,19 @@ export default function Adminlogin() {
             </span>
           </div>
           <div className="input_container">
-            <label className="input_label" htmlFor="email_field">
-              Email
+            <label className="input_label" htmlFor="username_field">
+              Username
             </label>
             <div className="inputsss">
               <FontAwesomeIcon icon={faUser} className="login-icons" />
               <input
                 placeholder="username"
                 title="Input title"
-                type="text"
+                type="username"
                 className="input_field"
-                id="user_field"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                id="username_field"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
               />
             </div>
           </div>
@@ -128,7 +109,7 @@ export default function Adminlogin() {
           </div>
           <p>
             <Link to="/CityPulse/ForgotPassword">Forgot Password?</Link>
-          </p>{" "}
+          </p>
           <Link className="note" to="/CityPulse/terms&conditions">
             Terms of use &amp; Conditions
           </Link>

@@ -14,6 +14,8 @@ import markerShadow from "leaflet/dist/images/marker-shadow.png";
 import "./CityMap.css";
 import axiosInstance from "./AxiosInstance";
 import { jwtDecode } from "jwt-decode";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const customIcon = new L.Icon({
   iconUrl: markerIcon,
@@ -23,7 +25,6 @@ const customIcon = new L.Icon({
   popupAnchor: [1, -34],
 });
 
-// Recenter map to user's location
 const RecenterMap = ({ location }) => {
   const map = useMap();
   useEffect(() => {
@@ -32,16 +33,14 @@ const RecenterMap = ({ location }) => {
   return null;
 };
 
-// Reverse geocode API call using OpenCage
 const fetchCityFromCoordinates = async (lat, lng) => {
   try {
-    const apiKey = "e0e38e0f1e984739a57706965353bb45"; // Replace with your OpenCage API key
+    const apiKey = "e0e38e0f1e984739a57706965353bb45";
     const response = await fetch(
       `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lng}&key=${apiKey}`
     );
     const data = await response.json();
     if (data.results && data.results[0]) {
-      // Extract the city name from the address components
       const city =
         data.results[0].components.city ||
         data.results[0].components.town ||
@@ -57,9 +56,8 @@ const fetchCityFromCoordinates = async (lat, lng) => {
 
 const CityMap = () => {
   const [markers, setMarkers] = useState([]);
-  const [userLocation, setUserLocation] = useState([51.505, -0.09]); // Default location
+  const [userLocation, setUserLocation] = useState([51.505, -0.09]);
 
-  // Get user's current location
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -70,6 +68,7 @@ const CityMap = () => {
       }
     );
   }, []);
+
   const fetchLocationName = async (lat, lng) => {
     try {
       const response = await fetch(
@@ -82,7 +81,7 @@ const CityMap = () => {
       return "Unknown location";
     }
   };
-  // Handle map click event to add a marker
+
   const MapClickHandler = () => {
     useMapEvents({
       click: async (e) => {
@@ -94,7 +93,7 @@ const CityMap = () => {
         const newMarker = {
           id: markers.length,
           position: e.latlng,
-          cityName: city, // Use city name from geocoding API
+          cityName: city,
           locationName,
           feedback: "",
           rating: 0,
@@ -105,7 +104,6 @@ const CityMap = () => {
     return null;
   };
 
-  // Handle feedback change
   const handleFeedbackChange = (e, id) => {
     const updatedMarkers = markers.map((marker) =>
       marker.id === id ? { ...marker, feedback: e.target.value } : marker
@@ -113,7 +111,6 @@ const CityMap = () => {
     setMarkers(updatedMarkers);
   };
 
-  // Handle rating change
   const handleRatingChange = (e, id) => {
     const updatedMarkers = markers.map((marker) =>
       marker.id === id
@@ -126,7 +123,7 @@ const CityMap = () => {
   const handleSubmit = async (marker) => {
     try {
       if (!marker.feedback || marker.rating === 0) {
-        console.error("Feedback or rating is missing");
+        toast.error("Feedback or rating is missing!");
         return;
       }
 
@@ -135,35 +132,33 @@ const CityMap = () => {
         const decodedToken = jwtDecode(token);
         const femail = decodedToken.sub;
 
-        // Ensure the city is correct
-        const city = marker.cityName || "Unknown City"; // City from reverse geocoding API
-
         const feedbackData = {
           femail,
-          city, // Store the city name here
-          location: marker.locationName || "Unknown loc", // Store the original location name here
+          city: marker.cityName || "Unknown City",
+          location: marker.locationName || "Unknown loc",
           feedback: marker.feedback,
           rating: marker.rating,
         };
 
         const response = await axiosInstance.post("/feedbacks", feedbackData);
         if (response.status === 200) {
-          console.log("Feedback submitted successfully");
+          toast.success("Feedback submitted successfully!");
         } else {
-          console.error("Failed to submit feedback to the backend");
+          toast.error("Failed to submit feedback to the backend!");
         }
       }
     } catch (error) {
       console.error("Error while submitting feedback:", error);
+      toast.error("An error occurred while submitting feedback!");
     }
   };
 
   return (
     <div className="card-dashboard">
+      <ToastContainer />
       <h2>Pin any place you wish</h2>
       <h3>and Give your valuable feedbacks</h3>
       <h3>We Value your Opinion 😊</h3>
-
       <p>
         Please provide honest and accurate feedback. Avoid posting fake reviews,
         as they can negatively impact the city's reputation.
@@ -182,10 +177,10 @@ const CityMap = () => {
         <MapClickHandler />
         {markers.map((marker) => (
           <Marker key={marker.id} position={marker.position} icon={customIcon}>
-            <Popup style={{ width: "200px" }}>
+            <Popup>
               <div className="feedback-div">
                 <label>
-                  Feedback: &nbsp;&nbsp;
+                  Feedback:&nbsp;&nbsp;
                   <textarea
                     className="feedback-text"
                     value={marker.feedback}
@@ -210,7 +205,7 @@ const CityMap = () => {
                   </select>
                 </label>
                 <button
-                  onClick={() => handleSubmit(marker)} // Pass the whole marker object
+                  onClick={() => handleSubmit(marker)}
                   className="feedback-button"
                 >
                   Submit Feedback

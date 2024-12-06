@@ -2,14 +2,19 @@ import React, { useState } from "react";
 import "./ForgotPassword.css";
 import { Link } from "react-router-dom";
 import emailjs from "emailjs-com";
-import Toast from "./components/Toast";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");
-  const [toastMessage, setToastMessage] = useState(null);
 
   const sendEmail = (e) => {
     e.preventDefault();
+
+    if (!email) {
+      toast.error("Email is required.");
+      return;
+    }
 
     emailjs
       .send(
@@ -25,37 +30,32 @@ export default function ForgotPassword() {
       )
       .then(
         () => {
-          // Store the email in local storage
           localStorage.setItem("temp_forgot_mail", email);
-          // Clear the email input
           setEmail("");
-          // Show success toast
-          setToastMessage({
-            message: "Password reset email sent!",
-            type: "success",
-          });
+          toast.success("Password reset email sent!");
         },
         (error) => {
-          console.error("Error:", error);
-          // Show error toast
-          setToastMessage({
-            message: "Error sending email. Please try again.",
-            type: "error",
-          });
+          console.error("EmailJS Error:", error);
+          toast.error("Error sending email. Please try again.");
         }
       );
   };
 
   return (
     <div>
-      {toastMessage && (
-        <Toast
-          message={toastMessage.message}
-          type={toastMessage.type}
-          color={toastMessage.type === "error" ? "red" : "green"}
-          onClose={() => setToastMessage(null)}
-        />
-      )}
+      {/* Toast container for displaying toast messages */}
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <div className="form-container">
         <div className="logo-container">Forgot Password</div>
         <form className="form" onSubmit={sendEmail}>

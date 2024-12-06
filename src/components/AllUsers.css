@@ -1,0 +1,59 @@
+.users-users-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.users-users-container h1 {
+  margin-bottom: 20px;
+  font-size: 2users-5em;
+  color: #333;
+}
+
+.users-users-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.users-user-card {
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0users-1);
+  overflow: hidden;
+  transition: transform 0users-2s;
+}
+
+.users-user-card:hover {
+  transform: translateY(-5px);
+}
+
+.users-user-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.users-user-details {
+  padding: 15px;
+}
+
+.users-user-details h2 {
+  margin: 0;
+  font-size: 1users-5em;
+  color: #555;
+}
+
+.users-user-details p {
+  margin: 5px 0;
+  color: #777;
+  font-size: 1em;
+}
+
+.users-loading {
+  text-align: center;
+  font-size: 1users-5em;
+  color: #555;
+}

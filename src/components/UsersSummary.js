@@ -2,19 +2,22 @@ import React, { useEffect, useState } from "react";
 import axiosInstance from "./AxiosInstance";
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import CountUp from "react-countup";
+import CityWiseDistribution from "./CityWiseDistribution";
 
 // Register required Chart.js components
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function UsersSummary() {
   const [userCount, setUserCount] = useState(0);
+  const [feedbackCount, setFeedbackCount] = useState(0);
   const [chartData, setChartData] = useState({});
 
   // Fetch total user count
   useEffect(() => {
     const fetchUserCount = async () => {
       try {
-        const response = await axiosInstance.get("/users/count");
+        const response = await axiosInstance.get("/admin/count");
         setUserCount(response.data);
       } catch (error) {
         console.error("Error fetching user count:", error);
@@ -24,11 +27,23 @@ export default function UsersSummary() {
     fetchUserCount();
   }, []);
 
-  // Fetch payment statistics
+  useEffect(() => {
+    const fetchFeedbackCount = async () => {
+      try {
+        const response = await axiosInstance.get("/admin/feedback-count");
+        setFeedbackCount(response.data);
+      } catch (error) {
+        console.error("Error fetching feedback count:", error);
+      }
+    };
+
+    fetchFeedbackCount();
+  }, []);
+
   useEffect(() => {
     const fetchPaymentStats = async () => {
       try {
-        const response = await axiosInstance.get("/users/payment-stats");
+        const response = await axiosInstance.get("/admin/payment-stats");
         const { Paid, Unpaid } = response.data;
 
         setChartData({
@@ -55,12 +70,36 @@ export default function UsersSummary() {
       {/* Total Users */}
       <div className="card-dashboard" style={{ marginBottom: "20px" }}>
         <div>
-          <h2>Total Users: {userCount}</h2>
+          <h2>
+            Total Users:{" "}
+            <CountUp
+              start={0}
+              end={userCount}
+              duration={2.5}
+              separator=","
+              decimals={0}
+            />
+          </h2>
+        </div>
+      </div>
+
+      <div className="card-dashboard" style={{ marginBottom: "20px" }}>
+        <div>
+          <h2>
+            Total Feedbacks:{" "}
+            <CountUp
+              start={0}
+              end={feedbackCount}
+              duration={2.5}
+              separator=","
+              decimals={0}
+            />
+          </h2>
         </div>
       </div>
 
       {/* Doughnut Chart for User Payment Stats */}
-      <div className="card-dashboard">
+      <div className="card-dashboard" style={{ marginBottom: "20px" }}>
         <h2>User Payment Stats</h2>
         {chartData.labels ? (
           <div style={{ height: "300px", width: "300px", margin: "auto" }}>
@@ -79,6 +118,7 @@ export default function UsersSummary() {
           <p>Loading chart...</p>
         )}
       </div>
+      <CityWiseDistribution />
     </div>
   );
 }

@@ -7,76 +7,63 @@ import {
   faArrowRightFromBracket,
   faBars,
   faBorderAll,
-  faCamera,
-  faCity,
   faComments,
-  faMap,
   faMoon,
-  faMountainCity,
-  faNewspaper,
-  faRoute,
-  faStar,
   faSun,
+  faThumbsUp,
   faUser,
+  faUsers,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
-import CityNews from "./components/CityNews";
 import Clock from "./components/Clock";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
-import Forum from "./components/Forum";
-import CityImages from "./components/CityImages";
-import TouristPlaces from "./components/TouristPlaces";
-import Profile from "./components/Profile";
-import Navigate from "./components/Navigate";
-import Compass from "./components/Compass";
-import AllMaps from "./components/AllMaps";
 import Loader from "./components/Loader";
-import SearchInCity from "./components/SearchInCity";
-import CityMap from "./components/CityMap";
 import ChatBot from "./components/ChatBot";
 import ScrollTop from "./components/ScrollTop";
-import Map1 from "./components/map1";
 import UsersSummary from "./components/UsersSummary";
-
-const ButtonStyles = {
-  shapeRendering: "geometricPrecision",
-  textRendering: "geometricPrecision",
-  imageRendering: "optimizeQuality",
-  fillRule: "evenodd",
-  clipRule: "evenodd",
-};
+import ApproveVistas from "./components/ApproveVistas";
+import AllFeedbacks from "./components/AllFeedbacks";
+import AllUsers from "./components/AllUsers";
+import { jwtDecode } from "jwt-decode";
 
 export default function AdminDashboard() {
   const [activeSection, setActiveSection] = useState("dashboard");
-  const [cityNews, setCityNews] = useState([]);
   const [loading, setLoading] = useState(true);
   const cityCenter = [17.385, 78.4867];
   const [location, setLocation] = useState(cityCenter);
   const [location_now, setLocation_now] = useState(cityCenter);
-  const [cityImages, setCityImages] = useState([]);
-  const [touristPlaces, setTouristPlaces] = useState([]);
   const [city, setCity] = useState("Vijayawada"); // Default city
+  const [userRole, setUserRole] = useState("");
 
   const navigate = useNavigate();
 
   const [userData, setUserData] = useState(null);
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("userData"));
-    setUserData(user);
+    // Retrieve and decode the JWT token
+    const token = localStorage.getItem("adminToken");
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token);
+        setUserRole(decodedToken.sub); // Set the role from the token
+      } catch (error) {
+        console.error("Error decoding JWT token:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
   }, []);
 
   const logout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("userData");
+    localStorage.removeItem("adminToken");
 
-    navigate("/CityPulse/userlogin");
+    navigate("/CityPulse/adminlogin");
   };
 
   useEffect(() => {
@@ -90,42 +77,6 @@ export default function AdminDashboard() {
       setLocation(user.coordinates);
     }
   }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Fetch News for Vijayawada
-        const newsResponse = await fetch(
-          `https://newsapi.org/v2/everything?q=${city}&apiKey=fa198e3599464930b2eccad7a8fdb736`
-        );
-        const newsData = await newsResponse.json();
-        setCityNews(newsData.articles);
-
-        // Fetch City Images
-        const imagesResponse = await fetch(
-          `https://api.unsplash.com/search/photos?query=${city}&client_id=4rDEFf3xFKi_8VeKPMVWjdA21d73zo0lpMxD1DGmerQ`
-        );
-        const imagesData = await imagesResponse.json();
-        setCityImages(imagesData.results);
-
-        // Fetch Tourist Places using OpenStreetMap Overpass API
-        const overpassUrl = `https://overpass-api.de/api/interpreter?data=[out:json];(node["tourism"](around:1000,${location[0]},${location[1]});way["tourism"](around:10000,${location[0]},${location[1]});relation["tourism"](around:1000,${location[0]},${location[1]}););out;`;
-        const touristResponse = await fetch(overpassUrl);
-        const touristData = await touristResponse.json();
-        setTouristPlaces(
-          touristData.elements.filter(
-            (element) => element.tags && element.tags.name
-          )
-        );
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [location, city]);
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -162,25 +113,6 @@ export default function AdminDashboard() {
     return null;
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Fetch City Images
-        const imagesResponse = await fetch(
-          `https://api.unsplash.com/search/photos?query=${city}&client_id=4rDEFf3xFKi_8VeKPMVWjdA21d73zo0lpMxD1DGmerQ`
-        );
-        const imagesData = await imagesResponse.json();
-        setCityImages(imagesData.results);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
   if (loading) {
     return <Loader />;
   }
@@ -188,35 +120,12 @@ export default function AdminDashboard() {
     switch (activeSection) {
       case "overview":
         return <Dashboard />;
-      case "news":
-        return <CityNews cityNews={cityNews} />;
-      case "all-maps":
-        return <AllMaps />;
-      case "forum":
-        return <Forum />;
-      case "views":
-        return <CityImages cityImages={cityImages} />;
-      case "tourist":
-        return <TouristPlaces touristPlaces={touristPlaces} />;
-      case "profile":
-        return <Profile />;
-      case "navigate":
-        return (
-          <div className="card-dashboard">
-            <h2>Pin a Place where you want to go</h2>
-            <h3>
-              Route Directions + Dynamic Route Simulation + Time Estimation with
-              Distance
-            </h3>
-            <Navigate />
-          </div>
-        );
-      case "mycity":
-        return <SearchInCity />;
-      case "feedback":
-        return <CityMap />;
-      case "map1":
-        return <Map1 />;
+      case "approve":
+        return <ApproveVistas />;
+      case "all-vistas":
+        return <AllFeedbacks />;
+      case "all-users":
+        return <AllUsers />;
       default:
         return <UsersSummary />;
     }
@@ -276,75 +185,30 @@ export default function AdminDashboard() {
 
             <NavLink
               className="navlinks"
-              onClick={() => setActiveSection("all-maps")}
+              onClick={() => setActiveSection("approve")}
             >
               <span className="icons">
-                <FontAwesomeIcon icon={faMap} />
+                <FontAwesomeIcon icon={faThumbsUp} />
               </span>
-              <h3>Maps</h3>
+              <h3>ApproveVistas</h3>
             </NavLink>
             <NavLink
               className="navlinks"
-              onClick={() => setActiveSection("navigate")}
-            >
-              <span className="icons">
-                <FontAwesomeIcon icon={faRoute} />
-              </span>
-              <h3>CityHop</h3>
-            </NavLink>
-            <NavLink
-              className="navlinks"
-              onClick={() => setActiveSection("mycity")}
-            >
-              <span className="icons">
-                <FontAwesomeIcon icon={faCity} />
-              </span>
-              <h3>My City</h3>
-            </NavLink>
-            <NavLink
-              className="navlinks"
-              onClick={() => setActiveSection("feedback")}
-            >
-              <span className="icons">
-                <FontAwesomeIcon icon={faStar} />
-              </span>
-              <h3>City Vistas</h3>
-            </NavLink>
-            <NavLink
-              className="navlinks"
-              onClick={() => setActiveSection("news")}
-            >
-              <span className="icons">
-                <FontAwesomeIcon icon={faNewspaper} />
-              </span>
-              <h3>News</h3>
-            </NavLink>
-            <NavLink
-              className="navlinks"
-              onClick={() => setActiveSection("forum")}
+              onClick={() => setActiveSection("all-vistas")}
             >
               <span className="icons">
                 <FontAwesomeIcon icon={faComments} />
               </span>
-              <h3>The Hub</h3>
+              <h3>All Vistas</h3>
             </NavLink>
             <NavLink
               className="navlinks"
-              onClick={() => setActiveSection("views")}
+              onClick={() => setActiveSection("all-users")}
             >
               <span className="icons">
-                <FontAwesomeIcon icon={faCamera} />
+                <FontAwesomeIcon icon={faUsers} />
               </span>
-              <h3>Clicks</h3>
-            </NavLink>
-            <NavLink
-              className="navlinks"
-              onClick={() => setActiveSection("tourist")}
-            >
-              <span className="icons">
-                <FontAwesomeIcon icon={faMountainCity} />
-              </span>
-              <h3>Viewpoints</h3>
+              <h3>All Users</h3>
             </NavLink>
             <NavLink
               className="navlinks"
@@ -397,7 +261,7 @@ export default function AdminDashboard() {
             <div className="profile">
               <div className="info">
                 <p>
-                  Hey, <b>{userData ? userData.username : "Loading..."}</b>
+                  Hey, <b>{userRole || "Loading..."}</b>
                 </p>
               </div>
               <div className="profile-photo">

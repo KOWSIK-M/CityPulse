@@ -4,34 +4,26 @@ import "./Login.css";
 import logo from "./images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "./components/AxiosInstance.js";
-import Toast from "./components/Toast.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faUser } from "@fortawesome/free-solid-svg-icons";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Userlogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [toastMessage, setToastMessage] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (!email) {
-      setToastMessage({
-        message: "Please fill in your email.",
-        type: "error", // Use error type for missing fields
-        color: "red",
-      });
+      toast.error("Please fill in your email.");
       return;
     }
 
     if (!password) {
-      setToastMessage({
-        message: "Please fill in your password.",
-        type: "error",
-        color: "red",
-      });
+      toast.error("Please fill in your password.");
       return;
     }
 
@@ -50,25 +42,14 @@ export default function Userlogin() {
         navigate("/CityPulse/userDashboard");
       }
     } catch (error) {
-      setToastMessage({
-        message: "Login failed. Please check your credentials.",
-        type: "error",
-        color: "red",
-      });
+      toast.error("Login failed. Please check your credentials.");
     }
   };
 
   return (
     <div>
+      <ToastContainer />
       <div style={{ height: "100vh" }}>
-        {toastMessage && (
-          <Toast
-            message={toastMessage.message}
-            type={toastMessage.type}
-            color={toastMessage.color}
-            onClose={() => setToastMessage(null)}
-          />
-        )}
         <form className="form_container" onSubmit={handleSubmit}>
           <div className="logo_container">
             <img

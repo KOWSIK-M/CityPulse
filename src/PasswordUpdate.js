@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import "./ForgotPassword.css";
-import Toast from "./components/Toast";
 import axiosInstance from "./components/AxiosInstance";
 import emailjs from "emailjs-com";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function PasswordUpdate() {
   const [password, setPassword] = useState("");
   const [retypePassword, setRetypePassword] = useState("");
-  const [toastMessage, setToastMessage] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -17,18 +17,12 @@ export default function PasswordUpdate() {
     const email = localStorage.getItem("temp_forgot_mail");
 
     if (!email) {
-      setToastMessage({
-        message: "No email found for password reset.",
-        type: "error",
-      });
+      toast.error("No email found for password reset.");
       return;
     }
 
     if (password !== retypePassword) {
-      setToastMessage({
-        message: "Passwords do not match!",
-        type: "error",
-      });
+      toast.error("Passwords do not match!");
       return;
     }
 
@@ -39,10 +33,7 @@ export default function PasswordUpdate() {
       });
 
       // On successful password update
-      setToastMessage({
-        message: response.data.message || "Password updated successfully!",
-        type: "success",
-      });
+      toast.success(response.data.message || "Password updated successfully!");
 
       // Send confirmation email
       emailjs
@@ -74,25 +65,27 @@ export default function PasswordUpdate() {
       }, 2000);
     } catch (error) {
       console.error("Error updating password:", error);
-      setToastMessage({
-        message:
-          error.response?.data?.message ||
-          "Failed to update password. Try again.",
-        type: "error",
-      });
+      toast.error(
+        error.response?.data?.message || "Failed to update password. Try again."
+      );
     }
   };
 
   return (
     <div>
-      {toastMessage && (
-        <Toast
-          message={toastMessage.message}
-          type={toastMessage.type}
-          color={toastMessage.type === "error" ? "red" : "green"}
-          onClose={() => setToastMessage(null)}
-        />
-      )}
+      {/* Toast container for displaying notifications */}
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={true}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <div className="form-container">
         <div className="logo-container">Update Password</div>
         <form className="form" onSubmit={handleSubmit}>

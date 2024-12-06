@@ -11,10 +11,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import signupImg from "../images/signup-image.jpg";
 import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
-
 import axiosInstance from "./AxiosInstance"; // Adjust path if needed
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-export default function SignUp(props) {
+export default function SignUp() {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -33,12 +34,37 @@ export default function SignUp(props) {
     setFormData({ ...formData, [name]: value });
   };
 
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePhoneNumber = (phone) => {
+    const phoneRegex = /^[6-9]\d{9}$/;
+    return phoneRegex.test(phone);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Check if passwords match
+    // Field validations
+    if (!validateEmail(formData.email)) {
+      toast.error("Invalid email format.");
+      return;
+    }
+
+    if (!validatePhoneNumber(formData.contact)) {
+      toast.error("Invalid phone number. Use a valid 10-digit number.");
+      return;
+    }
+
+    if (formData.password.length < 6) {
+      toast.error("Password must be at least 6 characters long.");
+      return;
+    }
+
     if (formData.password !== formData.re_pass) {
-      alert("Passwords do not match!");
+      toast.error("Passwords do not match.");
       return;
     }
 
@@ -49,17 +75,18 @@ export default function SignUp(props) {
         ...dataToSend,
       });
 
-      alert(response.data.success);
+      toast.success("Registration successful!");
       // Redirect to login page after successful registration
-      navigate("/CityPulse/userlogin"); // Redirect to the /userlogin page
+      navigate("/CityPulse/userlogin");
     } catch (error) {
-      alert(error.response?.data?.success || "Registration failed!");
+      toast.error(error.response?.data?.success || "Registration failed!");
     }
   };
 
   return (
     <div style={{ height: "100vh" }}>
       <div className="main">
+        <ToastContainer />
         <section className="signup">
           <div className="container-sup">
             <div className="signup-content">
