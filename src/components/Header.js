@@ -1,9 +1,9 @@
-import React, { useRef, useEffect } from 'react';
-import logo from '../images/logo.png';
-import {Link} from 'react-router-dom';
-import heroVideo from '../videos/bg.mp4';
+import React, { useRef, useEffect } from "react";
+import logo from "../images/logo.png";
+import { Link } from "react-router-dom";
+import heroVideo from "../videos/bg.mp4";
 
-const AnchorStyle={textDecoration:'none'}
+const AnchorStyle = { textDecoration: "none" };
 
 export default function Header() {
   const toastTriggerRef = useRef(null);
@@ -14,28 +14,28 @@ export default function Header() {
     const toastLiveExample = toastLiveExampleRef.current;
 
     if (toastTrigger) {
-      const toastBootstrap = window.bootstrap.Toast.getOrCreateInstance(toastLiveExample);
-      toastTrigger.addEventListener('click', () => {
+      const toastBootstrap =
+        window.bootstrap.Toast.getOrCreateInstance(toastLiveExample);
+      toastTrigger.addEventListener("click", () => {
         toastBootstrap.show();
       });
     }
 
     return () => {
       if (toastTrigger) {
-        toastTrigger.removeEventListener('click', () => {
-          const toastBootstrap = window.bootstrap.Toast.getOrCreateInstance(toastLiveExample);
+        toastTrigger.removeEventListener("click", () => {
+          const toastBootstrap =
+            window.bootstrap.Toast.getOrCreateInstance(toastLiveExample);
           toastBootstrap.show();
         });
       }
     };
   }, []);
 
-
-
   return (
     <div>
       <header className="header">
-      <video className="hero-video" src={heroVideo} autoPlay loop muted />
+        <video className="hero-video" src={heroVideo} autoPlay loop muted />
         <div className="hero-overlay"></div>
         <nav className="navbar1">
           <div className="container">
@@ -44,13 +44,29 @@ export default function Header() {
               <i className="fas fa-vihara"> CityPulse </i>
             </h1>
             <ul className="nav-items" style={{ marginLeft: "56vw" }}>
-              <li className="nav-item"><Link to="/CityPulse" style={AnchorStyle}>Home</Link></li>
-              <li className="nav-item"><Link to="/CityPulse/about" style={AnchorStyle}>About</Link></li>
-              <li className="nav-item"><Link to="/CityPulse/contact" style={AnchorStyle}>ContactUs</Link></li>
+              <li className="nav-item">
+                <Link to="/CityPulse" style={AnchorStyle}>
+                  Home
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/CityPulse/about" style={AnchorStyle}>
+                  About
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/CityPulse/contact" style={AnchorStyle}>
+                  ContactUs
+                </Link>
+              </li>
               <li className="nav-item">
                 <div class="menu">
                   <div class="item">
-                    <a href="/CityPulse" class="link" style={AnchorStyle}>
+                    <button
+                      class="link"
+                      style={AnchorStyle}
+                      onClick={(e) => e.preventDefault()}
+                    >
                       <span> Login </span>
                       <svg viewBox="0 0 360 360">
                         <g id="SVGRepo_iconCarrier">
@@ -60,29 +76,45 @@ export default function Header() {
                           ></path>
                         </g>
                       </svg>
-                    </a>
+                    </button>
                     <div class="submenu">
                       <div class="submenu-item">
-                        <Link to="/CityPulse/userlogin" className="submenu-link" style={AnchorStyle}>User</Link>
+                        <Link
+                          to="/CityPulse/userlogin"
+                          className="submenu-link"
+                          style={AnchorStyle}
+                        >
+                          User
+                        </Link>
                       </div>
                       <div class="submenu-item">
-                        <Link to="/CityPulse/adminlogin"  className="submenu-link" style={AnchorStyle}>Admin</Link>
+                        <Link
+                          to="/CityPulse/adminlogin"
+                          className="submenu-link"
+                          style={AnchorStyle}
+                        >
+                          Admin
+                        </Link>
                       </div>
                     </div>
                   </div>
                 </div>
-
               </li>
             </ul>
           </div>
         </nav>
 
-
         <div className="container">
           <div className="header-content">
             <h1 className="md-heading text-light">Welcome to CityPulse</h1>
-            <p className="text-light">A place where you can know your City Better!</p>
-            <button type="button" className="btnEx btnEx-primary text-red md-heading" ref={toastTriggerRef}>
+            <p className="text-light">
+              A place where you can know your City Better!
+            </p>
+            <button
+              type="button"
+              className="btnEx btnEx-primary text-red md-heading"
+              ref={toastTriggerRef}
+            >
               Explore
             </button>
 
@@ -94,15 +126,21 @@ export default function Header() {
               aria-atomic="true"
               style={{ zIndex: 1000, left: "140%", top: "210%" }}
             >
-              <div className="toast-header" >
-                <strong className="me-auto" style={{ fontSize: 10 }}>Hello, Friend! Please Login first.</strong>
-                <button type="button" className="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+              <div className="toast-header">
+                <strong className="me-auto" style={{ fontSize: 10 }}>
+                  Hello, Friend! Please Login first.
+                </strong>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="toast"
+                  aria-label="Close"
+                ></button>
               </div>
             </div>
-
           </div>
         </div>
       </header>
     </div>
-  )
+  );
 }
