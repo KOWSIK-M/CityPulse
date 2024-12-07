@@ -16,6 +16,7 @@ import WeatherDetails from "./components/WeatherDetails";
 import ForgotPassword from "./ForgotPassword";
 import PasswordUpdate from "./PasswordUpdate";
 import AdminDashboard from "./AdminDashboard";
+import SignUp from "./components/SignUp";
 function Website() {
   return (
     <BrowserRouter>
@@ -24,6 +25,7 @@ function Website() {
           <Route path="/" element={<App />} />
           <Route path="/userlogin" element={<Userlogin />} />
           <Route path="/adminlogin" element={<Adminlogin />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/about" element={<About />} />
           <Route path="/map2" element={<Map2 />} />
