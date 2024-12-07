@@ -16,14 +16,11 @@ import WeatherDetails from "./components/WeatherDetails";
 import ForgotPassword from "./ForgotPassword";
 import PasswordUpdate from "./PasswordUpdate";
 import AdminDashboard from "./AdminDashboard";
-import Topics from "./components/Topics";
-import ForumForm from "./components/ForumForm";
-import ForumDisplay from "./components/ForumDisplay";
 function Website() {
   return (
     <BrowserRouter>
       <div>
-        <Routes>
+        <Routes basename="/">
           <Route path="/" element={<App />} />
           <Route path="/userlogin" element={<Userlogin />} />
           <Route path="/adminlogin" element={<Adminlogin />} />

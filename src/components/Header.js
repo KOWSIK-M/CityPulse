@@ -50,12 +50,12 @@ export default function Header() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="//about" style={AnchorStyle}>
+                <Link to="/about" style={AnchorStyle}>
                   About
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="//contact" style={AnchorStyle}>
+                <Link to="/contact" style={AnchorStyle}>
                   ContactUs
                 </Link>
               </li>
@@ -80,7 +80,7 @@ export default function Header() {
                     <div class="submenu">
                       <div class="submenu-item">
                         <Link
-                          to="//userlogin"
+                          to="/userlogin"
                           className="submenu-link"
                           style={AnchorStyle}
                         >
@@ -89,7 +89,7 @@ export default function Header() {
                       </div>
                       <div class="submenu-item">
                         <Link
-                          to="//adminlogin"
+                          to="/adminlogin"
                           className="submenu-link"
                           style={AnchorStyle}
                         >
