@@ -38,7 +38,7 @@ export default function Adminlogin() {
         // Store token and admin data in localStorage
         localStorage.setItem("adminToken", token);
         // Redirect to admin dashboard
-        navigate("/CityPulse/adminDashboard");
+        navigate("/adminDashboard");
       }
     } catch (error) {
       toast.error("Login failed. Please check your credentials.");
@@ -108,9 +108,9 @@ export default function Adminlogin() {
             <hr className="line" />
           </div>
           <p>
-            <Link to="/CityPulse/ForgotPassword">Forgot Password?</Link>
+            <Link to="/ForgotPassword">Forgot Password?</Link>
           </p>
-          <Link className="note" to="/CityPulse/terms&conditions">
+          <Link className="note" to="/terms&conditions">
             Terms of use &amp; Conditions
           </Link>
         </form>

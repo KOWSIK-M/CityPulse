@@ -61,7 +61,7 @@ export default function PasswordUpdate() {
 
       // Redirect to login page after success
       setTimeout(() => {
-        navigate("/CityPulse/userlogin");
+        navigate("/userlogin");
       }, 2000);
     } catch (error) {
       console.error("Error updating password:", error);

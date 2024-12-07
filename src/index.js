@@ -8,7 +8,6 @@ import Contact from "./contact";
 import About from "./about";
 import Map2 from "./map2";
 import LeafMaps from "./LeafMaps";
-import SignUp from "./components/SignUp";
 import TermsAndConditions from "./TermsAndConditions";
 import PricingPayment from "./PricingPayment";
 import Payment from "./components/Payment";
@@ -24,30 +23,22 @@ function Website() {
   return (
     <BrowserRouter>
       <div>
-        <Routes basename="/CityPulse">
-          <Route path="/CityPulse" element={<App />} />
-          <Route path="CityPulse/userlogin" element={<Userlogin />} />
-          <Route path="CityPulse/adminlogin" element={<Adminlogin />} />
-          <Route path="CityPulse/contact" element={<Contact />} />
-          <Route path="CityPulse/about" element={<About />} />
-          <Route path="CityPulse/map2" element={<Map2 />} />
-          <Route path="CityPulse/leafmaps" element={<LeafMaps />} />
-          <Route path="CityPulse/signup" element={<SignUp />}></Route>
-          <Route
-            path="CityPulse/terms&conditions"
-            element={<TermsAndConditions />}
-          />
-          <Route path="CityPulse/PricingPayment" element={<PricingPayment />} />
-          <Route path="CityPulse/Payment" element={<Payment />} />
-          <Route path="CityPulse/UserDashboard" element={<UserDashboard />} />
-          <Route path="CityPulse/AdminDashboard" element={<AdminDashboard />} />
-          <Route path="CityPulse/ForgotPassword" element={<ForgotPassword />} />
-          <Route path="CityPulse/PasswordUpdate" element={<PasswordUpdate />} />
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/userlogin" element={<Userlogin />} />
+          <Route path="/adminlogin" element={<Adminlogin />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/map2" element={<Map2 />} />
+          <Route path="/leafmaps" element={<LeafMaps />} />
+          <Route path="/terms&conditions" element={<TermsAndConditions />} />
+          <Route path="/PricingPayment" element={<PricingPayment />} />
+          <Route path="/Payment" element={<Payment />} />
+          <Route path="/UserDashboard" element={<UserDashboard />} />
+          <Route path="/AdminDashboard" element={<AdminDashboard />} />
+          <Route path="/ForgotPassword" element={<ForgotPassword />} />
+          <Route path="/PasswordUpdate" element={<PasswordUpdate />} />
           <Route path="/weather" element={<WeatherDetails />} />
-
-          <Route path="/CityPulse/topics" element={<Topics />} />
-          <Route path="/CityPulse/submitForum" element={<ForumForm />} />
-          <Route path="/CityPulse/ForumDisplay" element={<ForumDisplay />} />
         </Routes>
       </div>
     </BrowserRouter>

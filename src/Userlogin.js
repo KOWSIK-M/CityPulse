@@ -44,7 +44,7 @@ export default function Userlogin() {
         const { token, user } = response.data;
         localStorage.setItem("token", token);
         localStorage.setItem("userData", JSON.stringify(user));
-        navigate("/CityPulse/userDashboard");
+        navigate("/userDashboard");
       }
     } catch (error) {
       toast.error("Login failed. Please check your credentials.");
@@ -124,12 +124,12 @@ export default function Userlogin() {
             <hr className="line" />
           </div>
           <p>
-            <Link to="/CityPulse/ForgotPassword">Forgot Password?</Link>
+            <Link to="/ForgotPassword">Forgot Password?</Link>
           </p>
           <p>
-            New User? <Link to="/CityPulse/signup">SignUp</Link>
+            New User? <Link to="/signup">SignUp</Link>
           </p>
-          <Link className="note" to="/CityPulse/terms&conditions">
+          <Link className="note" to="/terms&conditions">
             Terms of use &amp; Conditions
           </Link>
         </form>

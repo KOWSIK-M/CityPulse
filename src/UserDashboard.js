@@ -72,7 +72,7 @@ export default function UserDashboard() {
     const token = localStorage.getItem("token");
     if (!token) {
       // If no token, redirect to login
-      navigate("/CityPulse/userlogin");
+      navigate("/userlogin");
     }
   }, [navigate]);
 
@@ -87,7 +87,7 @@ export default function UserDashboard() {
     localStorage.removeItem("token");
     localStorage.removeItem("userData");
 
-    navigate("/CityPulse/userlogin");
+    navigate("/userlogin");
   };
 
   useEffect(() => {

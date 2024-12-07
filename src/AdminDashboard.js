@@ -65,7 +65,7 @@ export default function AdminDashboard() {
   const logout = () => {
     localStorage.removeItem("adminToken");
 
-    navigate("/CityPulse/adminlogin");
+    navigate("/adminlogin");
   };
 
   useEffect(() => {

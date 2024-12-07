@@ -77,7 +77,7 @@ export default function ForgotPassword() {
         </form>
         <p className="signup-link">
           Don't have an account?{" "}
-          <Link to="/CityPulse/signup" className="signup-link link">
+          <Link to="/signup" className="signup-link link">
             Sign up now
           </Link>
         </p>

@@ -40,22 +40,22 @@ export default function Header() {
         <nav className="navbar1">
           <div className="container">
             <h1 className="logo lg-heading text-light">
-              <img src={logo} alt="CityPulse" height={36} width={36}></img>
-              <i className="fas fa-vihara"> CityPulse </i>
+              <img src={logo} alt="/" height={36} width={36}></img>
+              <i className="fas fa-vihara"> </i>
             </h1>
             <ul className="nav-items" style={{ marginLeft: "56vw" }}>
               <li className="nav-item">
-                <Link to="/CityPulse" style={AnchorStyle}>
+                <Link to="/" style={AnchorStyle}>
                   Home
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/CityPulse/about" style={AnchorStyle}>
+                <Link to="//about" style={AnchorStyle}>
                   About
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/CityPulse/contact" style={AnchorStyle}>
+                <Link to="//contact" style={AnchorStyle}>
                   ContactUs
                 </Link>
               </li>
@@ -80,7 +80,7 @@ export default function Header() {
                     <div class="submenu">
                       <div class="submenu-item">
                         <Link
-                          to="/CityPulse/userlogin"
+                          to="//userlogin"
                           className="submenu-link"
                           style={AnchorStyle}
                         >
@@ -89,7 +89,7 @@ export default function Header() {
                       </div>
                       <div class="submenu-item">
                         <Link
-                          to="/CityPulse/adminlogin"
+                          to="//adminlogin"
                           className="submenu-link"
                           style={AnchorStyle}
                         >

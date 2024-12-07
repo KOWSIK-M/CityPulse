@@ -28,7 +28,7 @@ export default function ForumForm() {
 
       if (response.status === 200) {
         toast.success("Forum post submitted successfully!");
-        navigate("/CityPulse/forums");
+        navigate("/forums");
       }
     } catch (error) {
       toast.error("Failed to submit the post.");
