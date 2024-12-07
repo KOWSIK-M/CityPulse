@@ -8,10 +8,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock, faUser } from "@fortawesome/free-solid-svg-icons";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ReCAPTCHA from "react-google-recaptcha"; // Import reCAPTCHA
 
 export default function Userlogin() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [captchaVerified, setCaptchaVerified] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -27,6 +29,11 @@ export default function Userlogin() {
       return;
     }
 
+    if (!captchaVerified) {
+      toast.error("Please verify the reCAPTCHA.");
+      return;
+    }
+
     try {
       const response = await axiosInstance.post("/users/login", {
         email,
@@ -34,16 +41,18 @@ export default function Userlogin() {
       });
 
       if (response.status === 200) {
-        const { token, user } = response.data; // Extract token and user details
-        // Store token and user data in localStorage
+        const { token, user } = response.data;
         localStorage.setItem("token", token);
         localStorage.setItem("userData", JSON.stringify(user));
-        // Redirect to user dashboard
         navigate("/CityPulse/userDashboard");
       }
     } catch (error) {
       toast.error("Login failed. Please check your credentials.");
     }
+  };
+
+  const handleCaptchaChange = (value) => {
+    setCaptchaVerified(!!value);
   };
 
   return (
@@ -75,7 +84,6 @@ export default function Userlogin() {
               <FontAwesomeIcon icon={faUser} className="login-icons" />
               <input
                 placeholder="name@mail.com"
-                title="Input title"
                 type="email"
                 className="input_field"
                 id="email_field"
@@ -92,7 +100,6 @@ export default function Userlogin() {
               <FontAwesomeIcon icon={faLock} className="login-icons" />
               <input
                 placeholder="Password"
-                title="Input title"
                 type="password"
                 className="input_field"
                 id="password_field"
@@ -101,6 +108,13 @@ export default function Userlogin() {
               />
             </div>
           </div>
+
+          {/* reCAPTCHA Integration */}
+          <ReCAPTCHA
+            sitekey="6Lcd7JQqAAAAAMT-lTBgJsgIDp5O9pmTMYbaRIbu"
+            onChange={handleCaptchaChange}
+          />
+
           <button type="submit" className="sign-in_btn">
             <span>Sign In</span>
           </button>
@@ -111,10 +125,10 @@ export default function Userlogin() {
           </div>
           <p>
             <Link to="/CityPulse/ForgotPassword">Forgot Password?</Link>
-          </p>{" "}
+          </p>
           <p>
             New User? <Link to="/CityPulse/signup">SignUp</Link>
-          </p>{" "}
+          </p>
           <Link className="note" to="/CityPulse/terms&conditions">
             Terms of use &amp; Conditions
           </Link>

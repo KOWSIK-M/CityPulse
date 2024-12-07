@@ -17,6 +17,9 @@ import WeatherDetails from "./components/WeatherDetails";
 import ForgotPassword from "./ForgotPassword";
 import PasswordUpdate from "./PasswordUpdate";
 import AdminDashboard from "./AdminDashboard";
+import Topics from "./components/Topics";
+import ForumForm from "./components/ForumForm";
+import ForumDisplay from "./components/ForumDisplay";
 function Website() {
   return (
     <BrowserRouter>
@@ -41,6 +44,10 @@ function Website() {
           <Route path="CityPulse/ForgotPassword" element={<ForgotPassword />} />
           <Route path="CityPulse/PasswordUpdate" element={<PasswordUpdate />} />
           <Route path="/weather" element={<WeatherDetails />} />
+
+          <Route path="/CityPulse/topics" element={<Topics />} />
+          <Route path="/CityPulse/submitForum" element={<ForumForm />} />
+          <Route path="/CityPulse/ForumDisplay" element={<ForumDisplay />} />
         </Routes>
       </div>
     </BrowserRouter>

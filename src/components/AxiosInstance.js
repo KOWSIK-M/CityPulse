@@ -22,7 +22,10 @@ axiosInstance.interceptors.request.use(
       !config.url.includes("/admin/allfeedbacks") &&
       !config.url.includes("/admin/approve/*") &&
       !config.url.includes("/admin/unapproved") &&
-      !config.url.includes("/admin/status*")
+      !config.url.includes("/admin/status*") &&
+      !config.url.includes("/forums/like/*") &&
+      !config.url.includes("/forums/comment") &&
+      !config.url.includes("/forums/all")
     ) {
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;

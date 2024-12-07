@@ -1,0 +1,61 @@
+/* Container Styles */
+.topics-container {
+  text-align: center;
+  margin: 20px;
+}
+
+/* Topic List Styles */
+.topics-list {
+  list-style: none;
+  padding: 0;
+}
+
+.topic-item {
+  background: #ff7782;
+  color: white;
+  padding: 15px;
+  margin: 10px;
+  cursor: pointer;
+  font-size: 18px;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.topic-item:hover {
+  background: #ff5560;
+}
+
+/* Form Styles */
+.forum-form {
+  text-align: center;
+  margin-top: 20px;
+}
+
+textarea {
+  width: 90%;
+  margin: 10px 0;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.submit-button {
+  background: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.back-button {
+  background: #ccc;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}

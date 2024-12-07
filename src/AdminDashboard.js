@@ -7,6 +7,7 @@ import {
   faArrowRightFromBracket,
   faBars,
   faBorderAll,
+  faCheck,
   faComments,
   faMoon,
   faSun,
@@ -31,6 +32,7 @@ import ApproveVistas from "./components/ApproveVistas";
 import AllFeedbacks from "./components/AllFeedbacks";
 import AllUsers from "./components/AllUsers";
 import { jwtDecode } from "jwt-decode";
+import Approved from "./components/Approved";
 
 export default function AdminDashboard() {
   const [activeSection, setActiveSection] = useState("dashboard");
@@ -122,6 +124,8 @@ export default function AdminDashboard() {
         return <Dashboard />;
       case "approve":
         return <ApproveVistas />;
+      case "yes":
+        return <Approved />;
       case "all-vistas":
         return <AllFeedbacks />;
       case "all-users":
@@ -191,6 +195,15 @@ export default function AdminDashboard() {
                 <FontAwesomeIcon icon={faThumbsUp} />
               </span>
               <h3>ApproveVistas</h3>
+            </NavLink>
+            <NavLink
+              className="navlinks"
+              onClick={() => setActiveSection("yes")}
+            >
+              <span className="icons">
+                <FontAwesomeIcon icon={faCheck} />
+              </span>
+              <h3>Approved</h3>
             </NavLink>
             <NavLink
               className="navlinks"

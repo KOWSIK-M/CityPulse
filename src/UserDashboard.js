@@ -15,6 +15,7 @@ import {
   faMountainCity,
   faNewspaper,
   faRoute,
+  faScroll,
   faStar,
   faSun,
   faUser,
@@ -42,6 +43,8 @@ import CityMap from "./components/CityMap";
 import ChatBot from "./components/ChatBot";
 import ScrollTop from "./components/ScrollTop";
 import Map1 from "./components/map1";
+import Topics from "./components/Topics";
+import Hub from "./components/Hub";
 
 const ButtonStyles = {
   shapeRendering: "geometricPrecision",
@@ -201,7 +204,9 @@ export default function UserDashboard() {
       case "all-maps":
         return <AllMaps />;
       case "forum":
-        return <Forum />;
+        return <Hub />;
+      case "topics":
+        return <Topics />;
       case "views":
         return <CityImages cityImages={cityImages} />;
       case "tourist":
@@ -326,6 +331,15 @@ export default function UserDashboard() {
                 <FontAwesomeIcon icon={faNewspaper} />
               </span>
               <h3>News</h3>
+            </NavLink>
+            <NavLink
+              className="navlinks"
+              onClick={() => setActiveSection("topics")}
+            >
+              <span className="icons">
+                <FontAwesomeIcon icon={faScroll} />
+              </span>
+              <h3>Community Forum</h3>
             </NavLink>
             <NavLink
               className="navlinks"
