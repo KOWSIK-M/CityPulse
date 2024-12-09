@@ -527,8 +527,9 @@ export default function UserDashboard() {
                   Hey, <b>{userData ? userData.username : "Loading..."}</b>
                 </p>
               </div>
-              <div className="profile-photo">
+              <div>
                 <img
+                  className="profile-photo"
                   src={userData?.photoUrl || "/default-profile.png"}
                   alt="profile"
                 />

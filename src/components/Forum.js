@@ -1,8 +1,8 @@
-import { faCompass } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useState, useEffect } from 'react';
-import './Forum.css';
-import Loader from './Loader';
+import { faCompass } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useState, useEffect } from "react";
+import "./Forum.css";
+import Loader from "./Loader";
 
 function Forum() {
   const [posts, setPosts] = useState([]);
@@ -12,10 +12,26 @@ function Forum() {
   useEffect(() => {
     setTimeout(() => {
       const mockPosts = [
-        { id: 1, title: "City Event Feedback", content: "Share your feedback on recent events." },
-        { id: 2, title: "Public Transport Issues", content: "Discuss issues with local transport." },
-        { id: 3, title: "Parking Problems", content: "Discuss the issue of parking spaces in the city." },
-        { id: 4, title: "Waste Management", content: "How can we improve waste management in our city?" }
+        {
+          id: 1,
+          title: "City Event Feedback",
+          content: "Share your feedback on recent events.",
+        },
+        {
+          id: 2,
+          title: "Public Transport Issues",
+          content: "Discuss issues with local transport.",
+        },
+        {
+          id: 3,
+          title: "Parking Problems",
+          content: "Discuss the issue of parking spaces in the city.",
+        },
+        {
+          id: 4,
+          title: "Waste Management",
+          content: "How can we improve waste management in our city?",
+        },
       ];
       setPosts(mockPosts);
       setLoading(false);
@@ -24,15 +40,16 @@ function Forum() {
 
   const addPost = () => {
     if (newPost) {
-      setPosts([...posts, { id: posts.length + 1, title: newPost, content: "" }]);
+      setPosts([
+        ...posts,
+        { id: posts.length + 1, title: newPost, content: "" },
+      ]);
       setNewPost("");
     }
   };
 
   if (loading) {
-    return (
-		<Loader/>
-    );
+    return <Loader />;
   }
 
   return (

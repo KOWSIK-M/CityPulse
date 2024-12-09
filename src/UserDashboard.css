@@ -114,8 +114,8 @@ small {
 }
 
 .profile-photo {
-  width: 3.2rem;
-  height: 3.2rem;
+  width: 4.5rem;
+  height: 4.2rem;
   border-radius: 50%;
   overflow: hidden;
 }
@@ -127,7 +127,12 @@ small {
 p {
   color: var(--color-dark);
 }
-
+div p {
+  color: var(--color-dark);
+}
+strong {
+  color: var(--color-dark);
+}
 b {
   color: var(--color-dark);
 }
@@ -296,6 +301,7 @@ aside .sidebar .feedback-count {
 .right .theme-toggler .active {
   background: var(--color-primary);
   color: white;
+  height: 40px;
   border-radius: var(--border-radius-1);
   transition: 400ms ease;
 }

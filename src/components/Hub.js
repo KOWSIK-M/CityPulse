@@ -48,11 +48,15 @@ function Hub() {
         <p>No posts available yet.</p>
       ) : (
         forums.map((forum) => (
-          <div key={forum.id} className="forum-post">
+          <div
+            key={forum.id}
+            className="card-dashboard"
+            style={{ marginBottom: "8px" }}
+          >
             <h2>{forum.username}</h2>
             <h3>{forum.issue}</h3>
             <p>
-              <strong>{forum.username}</strong>|| {forum.msg}
+              <strong>{forum.user.username}</strong> : {forum.msg}
             </p>
             <div className="forum-actions">
               <button onClick={() => handleLike(forum.id)}>
