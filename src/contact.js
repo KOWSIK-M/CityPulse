@@ -14,7 +14,7 @@ function Contact() {
             <img src={logo} alt="CityPulse" height={36} width={36}></img>
             <i className="fas fa-vihara"> CityPulse </i>
           </h1>
-          <ul className="nav-items" style={{ marginLeft: "60vw" }}>
+          <ul className="nav-items" style={{ marginLeft: "55vw" }}>
             <li className="nav-item">
               <Link to="/">Home</Link>
             </li>
@@ -24,7 +24,7 @@ function Contact() {
             <li className="nav-item">
               <Link to="/contact">Contact us</Link>
             </li>
-            <li className="nav-item" style={{ marginLeft: "5vw" }}>
+            <li className="nav-item">
               <div class="menu">
                 <div class="item">
                   <Link to="#" class="link" style={AnchorStyle}>
@@ -70,14 +70,14 @@ function Contact() {
         <br></br>
         <br></br>
         <br></br>
-        <h3 style={{ color: "ivory" }}>
+        <h3 style={{ color: "ivory", marginLeft: "6vw" }}>
           For any Queries, you can feel free to contact us 😊
         </h3>
 
         <div class="contact-link1">
           <Link
             class="me"
-            to="whatsapp://send?phone=9346339305"
+            to="whatsapp://send?phone=7981793537"
             style={AnchorStyle}
           >
             Contact Us via WhatsApp{" "}
