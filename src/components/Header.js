@@ -44,22 +44,22 @@ export default function Header() {
               <i className="fas fa-vihara"> </i>
             </h1>
             <ul className="nav-items" style={{ marginLeft: "56vw" }}>
-              <li className="nav-item">
+              <li className="nav-item nav-home">
                 <Link to="/" style={AnchorStyle}>
                   Home
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className="nav-item nav-about">
                 <Link to="/about" style={AnchorStyle}>
                   About
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className="nav-item nav-contact">
                 <Link to="/contact" style={AnchorStyle}>
                   ContactUs
                 </Link>
               </li>
-              <li className="nav-item">
+              <li className="nav-item nav-login">
                 <div class="menu">
                   <div class="item">
                     <button

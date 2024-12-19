@@ -9,8 +9,6 @@ export default function HomeCards() {
           <div
             className="card custom-card shadow-green p-5 rounded border-info-subtle border-opacity-10 "
             style={{
-              height: "70vh",
-              width: "30vw",
               margin: "auto",
               marginLeft: "10vw",
               marginBottom: "3vh",
@@ -23,24 +21,21 @@ export default function HomeCards() {
                 src="https://picsum.photos/900/1600?random=4"
                 className="card-img-top"
                 alt="city"
-                style={{ height: "36vh", width: "24vw" }}
               ></img>
               <h5 className="card-title fs-1">Explore Roads</h5>
               <p className="card-text fst-italic">
                 Road maps are very helpful, right?
               </p>
               <Link to="/" className="btn btn-primary">
-                Go somewhere
+                Check
               </Link>
             </div>
           </div>
         </div>
         <div className="col-sm-5 mx-auto my-auto cards-appear">
           <div
-            className="card custom-card shadow-blue p-5 rounded border-info-subtle border-opacity-10 bg-gradient"
+            className="card custom-card card-right shadow-blue p-5 rounded border-info-subtle border-opacity-10 bg-gradient"
             style={{
-              height: "70vh",
-              width: "30vw",
               margin: "auto",
               marginRight: "10vw",
               marginBottom: "3vh",
@@ -56,14 +51,13 @@ export default function HomeCards() {
                 src="https://picsum.photos/1600/900?random=1"
                 className="card-img-top"
                 alt="city"
-                style={{ height: "36vh", width: "24vw" }}
               ></img>
               <h5 className="card-title fs-1">Forestation</h5>
               <p className="card-text fst-italic">
                 Is your city green? Lets find out
               </p>
               <Link to="/" className="btn btn-primary">
-                Go somewhere
+                Check
               </Link>
             </div>
           </div>
@@ -73,8 +67,6 @@ export default function HomeCards() {
           <div
             className="card custom-card shadow-bisque p-5 rounded border-info-subtle border-opacity-10 bg-gradient"
             style={{
-              height: "70vh",
-              width: "30vw",
               margin: "auto",
               marginLeft: "10vw",
               marginBottom: "2vh",
@@ -86,14 +78,13 @@ export default function HomeCards() {
                 src="https://picsum.photos/900/1600?random=2"
                 className="card-img-top"
                 alt="city"
-                style={{ height: "36vh", width: "24vw" }}
               ></img>
               <h5 className="card-title fs-1">Hotels</h5>
               <p className="card-text fst-italic">
                 New to city? Need some place to stay?
               </p>
               <Link to="/" className="btn btn-primary">
-                Go somewhere
+                Check
               </Link>
             </div>
           </div>
@@ -101,10 +92,8 @@ export default function HomeCards() {
 
         <div className="col-sm-5 mx-auto my-auto cards-appear">
           <div
-            className="card custom-card shadow-pink p-5 rounded border-info-subtle border-opacity-10 bg-gradient"
+            className="card custom-card card-right shadow-pink p-5 rounded border-info-subtle border-opacity-10 bg-gradient"
             style={{
-              height: "70vh",
-              width: "30vw",
               margin: "auto",
               marginRight: "10vw",
               marginBottom: "2vh",
@@ -116,14 +105,13 @@ export default function HomeCards() {
                 src="https://picsum.photos/1600/900?random=3"
                 className="card-img-top"
                 alt="city"
-                style={{ height: "36vh", width: "24vw" }}
               ></img>
               <h5 className="card-title fs-1">Public Amenities</h5>
               <p className="card-text fst-italic">
                 Know what's happening around you in your city with latest news.
               </p>
               <Link to="/" className="btn btn-primary">
-                Go somewhere
+                Check
               </Link>
             </div>
           </div>
