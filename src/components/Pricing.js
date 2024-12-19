@@ -8,7 +8,7 @@ export default function Pricing() {
 
   return (
     <div className="pricing">
-      <img class="pricing-img" src={pricing} alt="img" />
+      <img class="pricing-img" src={pricing} loading="lazy" alt="img" />
       <div className="whole-pricing">
         <div style={{ display: "flex", flexDirection: "column" }}>
           <label className="h1taglike">Pricing</label>

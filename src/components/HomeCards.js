@@ -19,6 +19,7 @@ export default function HomeCards() {
             <div className="card-body">
               <img
                 src="https://picsum.photos/900/1600?random=4"
+                loading="lazy"
                 className="card-img-top"
                 alt="city"
               ></img>
@@ -49,6 +50,7 @@ export default function HomeCards() {
             <div className="card-body">
               <img
                 src="https://picsum.photos/1600/900?random=1"
+                loading="lazy"
                 className="card-img-top"
                 alt="city"
               ></img>
@@ -76,6 +78,7 @@ export default function HomeCards() {
             <div className="card-body">
               <img
                 src="https://picsum.photos/900/1600?random=2"
+                loading="lazy"
                 className="card-img-top"
                 alt="city"
               ></img>
@@ -103,6 +106,7 @@ export default function HomeCards() {
             <div className="card-body">
               <img
                 src="https://picsum.photos/1600/900?random=3"
+                loading="lazy"
                 className="card-img-top"
                 alt="city"
               ></img>
