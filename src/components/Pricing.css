@@ -203,6 +203,7 @@ header .slider {
 }
 
 .pricing-transform {
+  height: 100vh;
   animation: transform-left linear;
   animation-timeline: view();
   animation-range: entry cover 40%;
@@ -235,10 +236,15 @@ header .slider {
     display: none;
   }
   .wrapper {
-    margin-left: 5vw;
+    margin-left: 0vw;
+    width: 100vw;
   }
   .whole-pricing {
     display: flex;
     flex-direction: column;
+  }
+  .pricing-transform {
+    height: 100%;
+    width: 100%;
   }
 }

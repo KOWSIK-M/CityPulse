@@ -27,7 +27,7 @@ export default function Pricing() {
             </label>
           </div>
         </div>
-        <div style={{ height: "100vh" }} className="pricing-transform">
+        <div className="pricing-transform">
           <div class="wrapper">
             <input id="tab-1" name="slider" type="radio" />
             <input checked id="tab-2" name="slider" type="radio" />
