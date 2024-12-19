@@ -505,7 +505,7 @@ li {
     margin-right: 0px;
     width: 50px;
     height: 50px;
-    background-image: url(./images/burger-bar.png), url(./images/close.png);
+    background-image: url(./images/burger.jpeg), url(./images/close.png);
     background-color: white;
     background-size: cover;
     background-repeat: no-repeat;
@@ -559,7 +559,6 @@ li {
 
   .header {
     width: 100%;
-    height: 100%;
   }
 
   .cookie-wrapper {
