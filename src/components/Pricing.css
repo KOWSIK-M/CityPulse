@@ -237,6 +237,7 @@ header .slider {
   }
   .wrapper {
     margin-left: 0vw;
+    margin-right: 0vw;
     width: 100vw;
   }
   .whole-pricing {
