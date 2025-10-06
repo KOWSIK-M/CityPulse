@@ -105,29 +105,77 @@ export default function UserDashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch News for Vijayawada
-        const newsResponse = await fetch(
-          `https://newsapi.org/v2/everything?q=${city}&apiKey=fa198e3599464930b2eccad7a8fdb736`
-        );
-        const newsData = await newsResponse.json();
-        setCityNews(newsData.articles);
+        // Fetch News for city
+        const newsKey = process.env.REACT_APP_NEWS_API_KEY;
+        if (!newsKey) {
+          console.warn(
+            "REACT_APP_NEWS_API_KEY is not set. Skipping news fetch."
+          );
+        } else {
+          const newsResponse = await fetch(
+            `https://newsapi.org/v2/everything?q=${encodeURIComponent(
+              city
+            )}&apiKey=${newsKey}`
+          );
+          if (!newsResponse.ok) {
+            console.error(
+              "News API error:",
+              newsResponse.status,
+              await newsResponse.text()
+            );
+          } else {
+            const newsData = await newsResponse.json();
+            setCityNews(newsData.articles || []);
+          }
+        }
 
-        // Fetch City Images
-        const imagesResponse = await fetch(
-          `https://api.unsplash.com/search/photos?query=${city}&client_id=4rDEFf3xFKi_8VeKPMVWjdA21d73zo0lpMxD1DGmerQ`
-        );
-        const imagesData = await imagesResponse.json();
-        setCityImages(imagesData.results);
+        // Fetch City Images (Unsplash)
+        const clicksKey = process.env.REACT_APP_CLICKS_API_KEY;
+        if (!clicksKey) {
+          console.warn(
+            "REACT_APP_CLICKS_API_KEY is not set. Skipping Unsplash image fetch."
+          );
+        } else {
+          const imagesResponse = await fetch(
+            `https://api.unsplash.com/search/photos?query=${encodeURIComponent(
+              city
+            )}&per_page=12`,
+            {
+              headers: {
+                Authorization: `Client-ID ${clicksKey}`,
+                Accept: "application/json",
+              },
+            }
+          );
+          if (!imagesResponse.ok) {
+            console.error(
+              "Unsplash error:",
+              imagesResponse.status,
+              await imagesResponse.text()
+            );
+          } else {
+            const imagesData = await imagesResponse.json();
+            setCityImages(imagesData.results || []);
+          }
+        }
 
         // Fetch Tourist Places using OpenStreetMap Overpass API
         const overpassUrl = `https://overpass-api.de/api/interpreter?data=[out:json];(node["tourism"](around:1000,${location[0]},${location[1]});way["tourism"](around:10000,${location[0]},${location[1]});relation["tourism"](around:1000,${location[0]},${location[1]}););out;`;
         const touristResponse = await fetch(overpassUrl);
-        const touristData = await touristResponse.json();
-        setTouristPlaces(
-          touristData.elements.filter(
-            (element) => element.tags && element.tags.name
-          )
-        );
+        if (!touristResponse.ok) {
+          console.error(
+            "Overpass API error:",
+            touristResponse.status,
+            await touristResponse.text()
+          );
+        } else {
+          const touristData = await touristResponse.json();
+          setTouristPlaces(
+            touristData.elements.filter(
+              (element) => element.tags && element.tags.name
+            )
+          );
+        }
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
@@ -172,25 +220,6 @@ export default function UserDashboard() {
     }, [center, map]);
     return null;
   };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Fetch City Images
-        const imagesResponse = await fetch(
-          `https://api.unsplash.com/search/photos?query=${city}&client_id=4rDEFf3xFKi_8VeKPMVWjdA21d73zo0lpMxD1DGmerQ`
-        );
-        const imagesData = await imagesResponse.json();
-        setCityImages(imagesData.results);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   if (loading) {
     return <Loader />;

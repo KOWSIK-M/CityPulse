@@ -35,7 +35,7 @@ const RecenterMap = ({ location }) => {
 
 const fetchCityFromCoordinates = async (lat, lng) => {
   try {
-    const apiKey = "e0e38e0f1e984739a57706965353bb45";
+    const apiKey = process.env.REACT_APP_CITYMAP_API_KEY;
     const response = await fetch(
       `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lng}&key=${apiKey}`
     );

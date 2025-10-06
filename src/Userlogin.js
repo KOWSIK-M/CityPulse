@@ -111,7 +111,7 @@ export default function Userlogin() {
 
           {/* reCAPTCHA Integration */}
           <ReCAPTCHA
-            sitekey="6Lcd7JQqAAAAAMT-lTBgJsgIDp5O9pmTMYbaRIbu"
+            sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY} // Use your reCAPTCHA site key
             onChange={handleCaptchaChange}
           />
 

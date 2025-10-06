@@ -4,7 +4,7 @@ import mapboxgl from 'mapbox-gl';
 function Map1() {
 
     useEffect(() => {
-        mapboxgl.accessToken = 'pk.eyJ1Ijoic3RydWRhbCIsImEiOiJja2U2d2wyd2IxaDd1MnJ1bDdpc3d5czhjIn0.CK_h23BOqoBtGYEqW1tuhQ';
+        mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_API_KEY;
         
         // Initialize map with India's default location
         const map = new mapboxgl.Map({

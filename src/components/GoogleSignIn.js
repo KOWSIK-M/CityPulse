@@ -6,7 +6,7 @@ import { jwtDecode } from "jwt-decode";
 export default function GoogleSignIn() {
   return (
     <div>
-      <GoogleOAuthProvider clientId="406615106327-1q10lbbef9oqo0gh14n4r22m0mmeifvu.apps.googleusercontent.com" >
+      <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID} >
       <GoogleLogin 
   onSuccess={credentialResponse => {
     const credentialResponseDecoded = jwtDecode(credentialResponse.credential);

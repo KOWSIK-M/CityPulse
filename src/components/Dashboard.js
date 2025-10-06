@@ -21,8 +21,8 @@ const Dashboard = () => {
   const [touristPlaces, setTouristPlaces] = useState([]);
   const [userData, setUserData] = useState(null);
 
-  const apiKey = "b848742b8067474bbc4a922dc41b0a4a"; // OpenWeather API key
-  const rapidApiKey = "bd851d75e9msh8a0e424af3b7de3p1153b7jsnb624a5da620f";
+  const apiKey = process.env.REACT_APP_OPENWEATHER_API_KEY; // OpenWeather API key
+  const rapidApiKey = process.env.REACT_APP_RAPID_API_KEY; // Rapid API key
   const [city, setCity] = useState("Vijayawada"); // Default city
   const [cityCoordinates, setCityCoordinates] = useState([17.385, 78.4867]); // Default coordinates
 
@@ -50,7 +50,7 @@ const Dashboard = () => {
   }, []);
 
   const fetchCityCoordinates = async (cityName) => {
-    const geocodeApiKey = "aae1cfd2378d26601e660d3e647710fc"; // OpenWeather API key for geo data
+    const geocodeApiKey = process.env.REACT_APP_GEOCODE_API_KEY ; // OpenWeather API key for geo data
     const geocodeUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=5&appid=${geocodeApiKey}`;
 
     try {

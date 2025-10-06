@@ -1,20 +1,22 @@
 // src/Dashboard/WeatherDetails.jsx
-import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import Loader from './Loader';
-import './WeatherDetails.css';
+import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import Loader from "./Loader";
+import "./WeatherDetails.css";
 
 function WeatherDetails() {
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(true);
-  const apiKey = "b848742b8067474bbc4a922dc41b0a4a"; // Your OpenWeather API key
+  const apiKey = process.env.REACT_APP_WEATHER_API_KEY; // Your OpenWeather API key
   const location = useLocation();
   const city = location.state?.city || "Guntur"; // Default to Guntur if city not provided
 
   useEffect(() => {
     const fetchWeather = async () => {
       try {
-        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`);
+        const response = await fetch(
+          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
+        );
         const data = await response.json();
         setWeather(data);
       } catch (error) {
@@ -37,7 +39,7 @@ function WeatherDetails() {
   };
 
   if (loading) {
-    return <Loader/>;
+    return <Loader />;
   }
 
   if (!weather || weather.cod !== 200) {
@@ -52,7 +54,10 @@ function WeatherDetails() {
       </div>
       <div className="weather-content">
         <div className="weather-icon">
-          <img src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@4x.png`} alt={weather.weather[0].description} />
+          <img
+            src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@4x.png`}
+            alt={weather.weather[0].description}
+          />
         </div>
         <div className="weather-info">
           <div className="temperature">{Math.round(weather.main.temp)}°C</div>
